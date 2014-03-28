@@ -1,0 +1,19 @@
+# Default messages
+# --- Constraints
+constraint.required=Polje je obavezno
+constraint.min=Minimum value: {0}
+constraint.max=Maximum value: {0}
+constraint.minLength=Prekratko, najmanje : {0} znaka/ova
+constraint.maxLength=Predugo, najvise : {0} znaka/ova
+constraint.email=Email
+
+# --- Errors
+error.invalid=Invalid value
+error.required=Polje je obavezno
+error.number=Numeric value expected
+error.min=Must be greater or equal to {0}
+error.max=Must be less or equal to {0}
+error.minLength=Prekratko, najmanje : {0} znaka/ova
+error.maxLength=Predugo, najvise : {0} znaka/ova
+error.email=Valid email required
+error.pattern=Must satisfy {0}

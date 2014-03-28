@@ -1,0 +1,16 @@
+.main-content {
+	margin-top: 50px;
+}
+
+.help-inline {
+	display: block;
+	color: red;
+}
+
+form input {
+	width: 100%;
+}
+
+form textarea {
+	width: 100%;
+}
