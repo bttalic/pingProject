@@ -1,7 +1,7 @@
 # --- !Ups
-
+/*
 create table inspection_service (
-  id                        BIGSERIAL not null,
+  id                        bigint auto_increment not null,
   name                      varchar(50),
   inspectorate_id           bigint,
   jurisdiction_id           bigint,
@@ -10,19 +10,19 @@ create table inspection_service (
 ;
 
 create table inspectorate (
-  id                        BIGSERIAL not null,
+  id                        bigint auto_increment not null,
   name                      varchar(16),
   constraint pk_inspectorate primary key (id))
 ;
 
 create table jurisdiction (
-  id                        BIGSERIAL not null,
+  id                        bigint auto_increment not null,
   name                      varchar(50),
   constraint pk_jurisdiction primary key (id))
 ;
 
 create table person (
-  id                        BIGSERIAL not null,
+  id                        bigint auto_increment not null,
   name                      varchar(50),
   phone_number              varchar(12),
   email                     varchar(50),
@@ -31,7 +31,7 @@ create table person (
 ;
 
 create table product (
-  id                        BIGSERIAL not null,
+  id                        bigint auto_increment not null,
   name                      varchar(50),
   manufacturer              varchar(50),
   country_of_origin         varchar(50),
@@ -40,12 +40,12 @@ create table product (
   constraint pk_product primary key (id))
 ;
 
-INSERT INTO jurisdiction VALUES ('1', 'Tržišna inspekcija');
-INSERT INTO jurisdiction VALUES ('2', 'Zdravstveno – sanitarna inspekcija');
+INSERT INTO `jurisdiction`(`id`, `name`) VALUES ('1', 'Tržišna inspekcija');
+INSERT INTO `jurisdiction`(`id`, `name`) VALUES ('2', 'Zdravstveno – sanitarna inspekcija');
 
-INSERT INTO inspectorate VALUES ('1', 'FBiH');
-INSERT INTO inspectorate VALUES ('2', 'RS');
-INSERT INTO inspectorate VALUES ('3', 'Disktrit Brčko');
+INSERT INTO `inspectorate`(`id`, `name`) VALUES ('1', 'FBiH');
+INSERT INTO `inspectorate`(`id`, `name`) VALUES ('2', 'RS');
+INSERT INTO `inspectorate`(`id`, `name`) VALUES ('3', 'Disktrit Brčko');
 
-
+*/
 
