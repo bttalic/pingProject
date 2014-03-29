@@ -1,0 +1,72 @@
+@(people: List[Person], personForm: Form[Person])
+@import helper._
+@import helper.twitterBootstrap._
+@main("Kontakt Osobe") {
+
+<div class="col-md-6" id='personIndex'>   
+    <table class='table table-striped'> 
+        <thead>
+            <tr class="active"> <th> Ime i Prezime </th> <th> Telefon </th> <th> E-mail </th> <th> Fax </th> 
+            </thead>
+            <tbody>
+            </tr>
+            @if(people.size() > 0 ){
+            @for(person <- people) {
+            <tr objectId = "@person.id">
+                <td field="name"> @person.name </td> <td field="phoneNumber"> @person.phoneNumber </td>
+                 <td field="email" > @person.email </td>
+                <td field="fax"> @person.fax </td>
+            </tr>         
+        }  
+        } else {
+            <tr> <td> Spisak je prazan </td> </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+<div class="col-md-5 col-md-offset-1">
+    <div class="panel panel-primary hidden">
+      <div class="panel-heading">
+          <div class="btn-group">
+             <button id='saveChanges' class='btn btn-sm btn-success'> Spremi Promjene </button>
+             <button id='deletePerson' class='btn btn-sm btn-danger'> Izbrisi Osobu </button>
+         </div>
+     </div>
+     <div class="panel-body">
+        @form(routes.PersonController.updatePerson(), 'id->"updateForm") {
+        <div class="form-group">
+          @inputText(personForm("name"),
+		'_label->"Ime i Prezime",
+		'_showConstraints -> false
+		) 
+
+		@inputText(personForm("phoneNumber"),
+		'_label->"Broj Telefona",
+		'_showConstraints -> false,
+		'_help->"+387xxxxxxxx"
+		)
+
+		@inputText(personForm("email"),
+		'_label->"E-mail",
+		'_showConstraints -> false
+		) 
+
+		@inputText(personForm("fax"),
+		'_label->"Fax",
+		'_showConstraints -> false,
+		'_help->"+387xxxxxxxx"
+		)
+      
+      @inputText(personForm("id"),
+      '_label->"",
+      'class -> "hidden"
+      ) 
+      }
+      
+  </div>
+</div>
+</div>
+</div> 
+<script src='@routes.Assets.at("javascripts/indexHelper.js")'></script>
+}

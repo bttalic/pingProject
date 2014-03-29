@@ -1,26 +1,51 @@
-# --- Created by Ebean DDL
-# To stop Ebean DDL generation, remove this comment and start using Evolutions
-
 # --- !Ups
+
+create table inspection_service (
+  id                        bigint auto_increment not null,
+  name                      varchar(50),
+  inspectorate_id           bigint,
+  jurisdiction_id           bigint,
+  person_id                 bigint,
+  constraint pk_inspection_service primary key (id))
+;
+
+create table inspectorate (
+  id                        bigint auto_increment not null,
+  name                      varchar(16),
+  constraint pk_inspectorate primary key (id))
+;
+
+create table jurisdiction (
+  id                        bigint auto_increment not null,
+  name                      varchar(50),
+  constraint pk_jurisdiction primary key (id))
+;
+
+create table person (
+  id                        bigint auto_increment not null,
+  name                      varchar(50),
+  phone_number              varchar(12),
+  email                     varchar(50),
+  fax                       varchar(12),
+  constraint pk_person primary key (id))
+;
 
 create table product (
   id                        bigint auto_increment not null,
-  name                      varchar(255),
-  manufacturer              varchar(255),
-  country_of_origin         varchar(255),
-  serial_number             varchar(255),
+  name                      varchar(50),
+  manufacturer              varchar(50),
+  country_of_origin         varchar(50),
+  serial_number             varchar(20),
   description               varchar(255),
   constraint pk_product primary key (id))
 ;
 
+INSERT INTO `jurisdiction`(`id`, `name`) VALUES ('1', 'Tržišna inspekcija');
+INSERT INTO `jurisdiction`(`id`, `name`) VALUES ('2', 'Zdravstveno – sanitarna inspekcija');
+
+INSERT INTO `inspectorate`(`id`, `name`) VALUES ('1', 'FBiH');
+INSERT INTO `inspectorate`(`id`, `name`) VALUES ('2', 'RS');
+INSERT INTO `inspectorate`(`id`, `name`) VALUES ('3', 'Disktrit Brčko');
 
 
-
-# --- !Downs
-
-SET FOREIGN_KEY_CHECKS=0;
-
-drop table product;
-
-SET FOREIGN_KEY_CHECKS=1;
 

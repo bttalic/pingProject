@@ -1,5 +1,5 @@
 .main-content {
-	margin-top: 50px;
+	margin-top: 55px;
 }
 
 .help-inline {
@@ -7,10 +7,38 @@
 	color: red;
 }
 
-form input {
+form input, form select {
 	width: 100%;
 }
 
 form textarea {
 	width: 100%;
+}
+
+.inspectionServiceList li {
+	list-style: none;
+}
+
+.inspectionServiceList li .panel {
+	width: 100%;
+	border: 0 none #000000;
+	margin-bottom: 1px;
+}
+
+.inspectionServiceList li .panel .panel-body {
+	margin-left: 10%;
+	width: 90%;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	border-color: #428bca;
+}
+
+.inspectionServiceList li .panel .panel-body p {
+	display: inline;
+}
+.inspectionServiceList li .panel .panel-body .attributeName,
+.inspectionServiceList li .panel .panel-body h5 {
+	font-weight: bold;
 }

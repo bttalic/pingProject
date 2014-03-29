@@ -53,11 +53,11 @@ public class Product extends Model {
 			return find.byId(id);
 		}
 		
-		public static void update(Product newValues) {
+		public static void updateProduct(Product newValues) {
 			Product product = find.byId(newValues.id);
 			if(product != null){
 				product.copyValues(newValues);
-				product.save();
+				product.update();
 			}
 		}
 
@@ -69,7 +69,7 @@ public class Product extends Model {
 			this.name = newValues.name;
 			this.manufacturer = newValues.manufacturer;
 			this.countryOfOrigin = newValues.countryOfOrigin;
-			this.serialNumber = newValues.countryOfOrigin;
+			this.serialNumber = newValues.serialNumber;
 			this.description = newValues.description;
 		}
 		
