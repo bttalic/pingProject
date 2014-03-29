@@ -18,7 +18,7 @@ POST    /person/new               				controllers.PersonController.newPerson()
 POST    /person/update							controllers.PersonController.updatePerson()
 POST    /person/:id/delete						controllers.PersonController.deletePerson(id: Long)
 
-GET     /inspectionservice          			controllers.InspectionServiceController.index()
+#GET     /inspectionservice          			controllers.InspectionServiceController.index()
 GET     /inspectionservice/new					controllers.InspectionServiceController.create()
 POST    /inspectionservice/new               	controllers.InspectionServiceController.newInspectionService()
 POST    /inspectionservice/update				controllers.InspectionServiceController.updateInspectionService()
