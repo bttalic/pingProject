@@ -35,10 +35,27 @@ form textarea {
 	border-color: #428bca;
 }
 
+.inspectionServiceList li .panel-danger .panel-body {
+	border-color: #ebccd1;
+}
+
 .inspectionServiceList li .panel .panel-body p {
 	display: inline;
 }
 .inspectionServiceList li .panel .panel-body .attributeName,
 .inspectionServiceList li .panel .panel-body h5 {
 	font-weight: bold;
+}
+
+.form-inline {
+	display: inline-block;
+}
+
+.form-inline input, .form-inline select {
+	width: auto;
+	display: inline-block;
+}
+
+.form-inline .clearfix  {
+	display: inline-block;
 }

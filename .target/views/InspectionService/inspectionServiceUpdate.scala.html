@@ -1,1 +1,58 @@
-<h1> Test </h1>
+@(inspectionServiceForm: Form[InspectionService],
+ jurisdictions: Map[String, String],
+ inspectorates: Map[String, String],
+ people: Map[String, String],
+ service: InspectionService
+ )
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+@main("Dodaj Inspekcijsko Tijelo") {
+
+<div class="well col-md-5 col-md-offset-3">
+	<h2>Novo inspekcijsko tijelo</h2>
+
+	@form(routes.InspectionServiceController.updateInspectionService()) {
+
+
+	<div class="form-group">
+		@inputText(inspectionServiceForm("name"),
+		'_label->"Naziv inspekcijskog tijela",
+		'_showConstraints -> false
+		) 
+
+		@select(inspectionServiceForm("inspectorateId"), options(inspectorates),
+		'_label->"Inspektorat",
+		'_showConstraints -> false
+		)
+
+		@select(inspectionServiceForm("jurisdictionId"), options(jurisdictions),
+		'_label->"Nadležnost",
+		'_showConstraints -> false
+		)
+
+		@select(inspectionServiceForm("personId"), options(people),
+		'_label->"Kontakt Osoba",
+		'_showConstraints -> false
+		)
+
+		@inputText(inspectionServiceForm("id"),
+		'_label->"Id",
+		'_showConstraints -> false,
+		'_class->"hidden"
+		) 
+		<section class="alert alert-info">
+		Osoba nije na spisku? <a href="@routes.PersonController.create()" class='pull-right btn btn-sm btn-success'>Dodaj Osobu</a>
+		</section>
+
+		<input type="submit" value="Spremi promjene" class='btn btn-warning' > 
+	</div>
+} 
+@form(routes.InspectionServiceController.deleteInspectionService(service.id)) {
+			<input type="submit" value="Izbrisi" class='btn btn-danger' > 
+		}
+</div>
+
+}

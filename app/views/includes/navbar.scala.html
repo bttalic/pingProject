@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Bootstrap theme</a>
+      <a class="navbar-brand" href="/"> Inspektor </a>
     </div>
     <div class="navbar-collapse collapse pull-right">
       <ul class="nav navbar-nav">
@@ -16,29 +16,27 @@
           <ul class="dropdown-menu">
             <li><a href="@routes.ProductController.index()">Pregled Proizvoda</a></li>
             <li><a href="@routes.ProductController.create()">Dodaj Proizvod</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
           </ul>
         </li>
         <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Kontakt Osobe <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Kontakt Osobe <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="@routes.PersonController.index()">Pregled Kontakt Osoba</a></li>
             <li><a href="@routes.PersonController.create()">Dodaj Kontakt Osobu</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-           <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Inspekcijska Tijela <b class="caret"></b></a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Inspekcijska Tijela <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="@routes.InspectionServiceController.index()">Pregled Inspekcijskih Tijela </a></li>
-            <li><a href="@routes.InspectionServiceController.create()">Dodaj  Inspekcijskih Tijela </a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="@routes.InspectionServiceController.create()">Dodaj Inspekcijsko Tijelo </a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Inspekcijska Kontrola <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="@routes.InspectionController.index()">Pregled Inspekcijskih kontrola </a></li>
+            <li><a href="@routes.InspectionController.create()">Dodavanje Inspekcijskih Kontrola </a></li>
           </ul>
         </li>
       </ul>

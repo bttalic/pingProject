@@ -29,8 +29,8 @@ public class InspectionServiceController extends Controller {
 	}
 
 	public static Result update(Long id) {
-		InspectionService thisService = InspectionService.find(id);
-		if( thisService != null){
+		if( InspectionService.exists(id) == true ){
+			InspectionService thisService = InspectionService.find(id);
 			inspectionServiceForm = Form.form(InspectionService.class);
 			inspectionServiceForm = inspectionServiceForm.fill(thisService);
 			return ok (views.html.InspectionService.inspectionServiceUpdate.render(
@@ -68,7 +68,7 @@ public class InspectionServiceController extends Controller {
 	public static Result deleteInspectionService(Long id){
 		InspectionService.delete(id);
 		cleanForms();
-		return ok();
+		return redirect(routes.InspectionServiceController.index());
 	}
 	
 	private static void refreshFilledForm(){

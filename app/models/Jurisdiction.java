@@ -10,6 +10,8 @@ import javax.persistence.*;
 
 @Entity
 public class Jurisdiction extends Model {
+
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jurisdiction_id_seq")
 	@Id
 	public Long id;
 
@@ -17,6 +19,11 @@ public class Jurisdiction extends Model {
 	@MinLength(value = 2)
 	@MaxLength(value = 16)
 	public String name;
+
+	public Jurisdiction(){
+		String placeHolder = "Nije dostupno";
+		name = placeHolder;
+	}
 
 	public static Finder<Long,Jurisdiction> find = new Finder(
 		Long.class, Jurisdiction.class
@@ -27,7 +34,17 @@ public class Jurisdiction extends Model {
 	}
 
 	public static Jurisdiction find(Long id){
-		return find.byId(id);
+		if( id == null )
+			return new Jurisdiction();
+
+		Jurisdiction thisJurisdiction = find.byId(id);
+		if( thisJurisdiction == null )
+			thisJurisdiction = new Jurisdiction();
+		return thisJurisdiction;
+	}
+
+	public static boolean exists(Long id){
+		return find.byId(id) != null;
 	}
 
 	public static Map allAsMap() {

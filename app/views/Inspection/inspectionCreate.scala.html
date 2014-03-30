@@ -1,0 +1,55 @@
+@(inspectionForm: Form[Inspection],
+inspectionServices: Map[String, String],
+products: Map[String, String]
+)
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@main("Dodaj Inspekcijsku Kontrolu") {
+
+<div class="well col-md-5 col-md-offset-3">
+	<h2>Nova inspekcijska kontrola</h2>
+
+	@form(routes.InspectionController.newInspection()) {
+
+
+	<div class="form-group">
+		@inputText(inspectionForm("inspectionDate"),
+		'_label->"Datum Kontrole",
+		'_showConstraints -> false
+		)
+
+		@select(inspectionForm("inspectionServiceId"), options(inspectionServices),
+		'_label->"Inspekcijsko Tijelo",
+		'_showConstraints -> false
+		) 
+
+		@select(inspectionForm("productId"), options(products),
+		'_label->"Kontrolisani Proizvod",
+		'_showConstraints -> false
+		)
+
+		@select(inspectionForm("safe"), options("0"->"Nije Siguran", "1"->"Siguran"),
+		'_label->"Proizvod Siguran?",
+		'_showConstraints -> false
+		)
+
+		@textarea(field = inspectionForm("inspectionResult"), args = 'rows -> 3, 'cols -> 50,'_label->"Rezultat Kontrole",
+		'_showConstraints -> false)
+
+		<input type="submit" value="Dodaj izvještaj" class='btn btn-primary' > 
+	</div>
+} 
+</div>
+<script src='@routes.Assets.at("javascripts/jquery.pickmeup.min.js")'></script>
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/pickmeup.min.css")">
+<script>
+
+$('#inspectionDate').pickmeup({
+    format  : 'Y-m-d',
+    max: new Date()
+});
+
+</script>
+}

@@ -1,0 +1,107 @@
+@(inspections: List[Inspection], searchForm: Form[Search],
+inspectionDates: Map[String, String], inspectionServices: Map[String, String])
+@import helper._
+@import helper.twitterBootstrap._
+@main("Inspekcijska tijela") {
+
+<h2> Lista Inspekcijskih tijela </h2> <p> Klik na naziv prikazuje detaljni pregled </p>
+
+@form(routes.InspectionController.index(), 'method->"POST") {
+
+
+	<div class="form-inline">
+
+		@select(searchForm("inspectionDate"), options(inspectionDates),
+		'_label->"Datum",
+		'_showConstraints -> false
+		)
+
+		@select(searchForm("inspectionServiceId"), options(inspectionServices),
+		'_label->"Inspekcijsko Tijelo",
+		'_showConstraints -> false
+		)
+
+		<input type="submit" value="Filtriraj" class='btn btn-primary' > 
+	</div>
+} 
+
+
+@if(inspections.size() > 0 ){
+
+<ul class='inspectionServiceList'>
+	@for( inspection <- inspections ){
+	<li>
+		<div class="panel panel-@inspection.getCSSClass()">
+			<div class="panel-heading">
+				<h1 class="panel-title"> @inspection.product.name | @inspection.getDate()</h1>
+			</div>
+			<div class="panel-body hidden">
+				<h2> Inspekcijski Izvještaj </h2>
+				<a href='@routes.InspectionController.update(inspection.id)' class='btn btn-warning btn-sm'> Promjeni Podatke </a>
+				<div class='row'>
+					<div class="col-md-6">
+						<div >
+							<h3> Datum Kontrole: </h3> <p> @inspection.getDate() </p>
+						</div>
+						<h3> Inspekcijsko Tijelo: </h3>
+						<div >
+							<p class="attributeName"> Ime: </p> <p> @inspection.inspectionService.name </p>
+						</div>
+						<div >
+							<p class="attributeName"> Inspektorat: </p> <p> @inspection.inspectionService.inspectorate.name </p>
+						</div>
+						<div >
+							<p class="attributeName"> Nadleznost: </p> <p> @inspection.inspectionService.jurisdiction.name </p>
+						</div>
+						<h2> Kontakt osoba: </h2>
+						<div >
+							<p class="attributeName"> Ime: </p> <p> @inspection.inspectionService.contactPerson.name </p>
+						</div>
+						<div >
+							<p class="attributeName"> Telefon: </p> <p> @inspection.inspectionService.contactPerson.phoneNumber </p>
+						</div>
+						<div >
+							<p class="attributeName"> Email: </p> <p> @inspection.inspectionService.contactPerson.email </p>
+						</div>
+						<div >
+							<p class="attributeName"> Fax: </p> <p> @inspection.inspectionService.contactPerson.fax </p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<h2> Kontrolisani Proizvod: </h2>
+						<div >
+							<p class='attributeName'> Naziv: </p> <p> @inspection.product.name </p>
+						</div>
+						<div >
+							<p class='attributeName'> Proizvodac: </p> <p> @inspection.product.manufacturer </p>
+						</div>
+						<div >
+							<p class='attributeName'> Zemlja porijekla: </p> <p> @inspection.product.countryOfOrigin </p>
+						</div>
+						<div >
+							<p class='attributeName'> Serijski broj: </p> <p> @inspection.product.serialNumber </p>
+						</div>
+						<div >
+							<p class='attributeName'> Opis: </p> <p> @inspection.product.description </p>
+						</div>
+						<h2> Ocjena sigurnosti </h2>
+						<div >
+							<p class='attributeName'> Proizvod Siguran: </p> <p> @inspection.isSafe() </p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md">
+					<h2> Rezultat kontrole: </h2>
+					<p> @inspection.inspectionResult </p>
+				</div>
+			</div>
+		</div>
+	</li>
+}
+</ul>
+
+} else {
+<h4> Lista je prazna </h4>
+}
+<script src='@routes.Assets.at("javascripts/inspectionServiceIndex.js")'></script>
+}

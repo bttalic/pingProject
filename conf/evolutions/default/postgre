@@ -1,14 +1,5 @@
 # --- !Ups
 
-create table inspection (
-  id                        BIGSERIAL not null,
-  inspection_date           date NOT NULL,
-  inspection_service_id     bigint NOT NULL,
-  product_id                bigint NOT NULL,
-  inspection_result         text NOT NULL,
-  safe                      boolean NULL,
-  constraint pk_inspection primary key (id))
-;
 
 create table inspection_service (
   id                        BIGSERIAL not null,

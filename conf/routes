@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           			controllers.InspectionServiceController.index()
+#GET     /                           			controllers.InspectionController.index()
 
 GET     /product                   				controllers.ProductController.index()
 GET     /product/new							controllers.ProductController.create()
@@ -18,12 +18,20 @@ POST    /person/new               				controllers.PersonController.newPerson()
 POST    /person/update							controllers.PersonController.updatePerson()
 POST    /person/:id/delete						controllers.PersonController.deletePerson(id: Long)
 
-#GET     /inspectionservice          			controllers.InspectionServiceController.index()
+GET     /inspectionservice          			controllers.InspectionServiceController.index()
 GET     /inspectionservice/new					controllers.InspectionServiceController.create()
 POST    /inspectionservice/new               	controllers.InspectionServiceController.newInspectionService()
 POST    /inspectionservice/update				controllers.InspectionServiceController.updateInspectionService()
 GET    	/inspectionservice/:id/update			controllers.InspectionServiceController.update(id: Long)
 POST    /inspectionservice/:id/delete			controllers.InspectionServiceController.deleteInspectionService(id: Long)
+
+POST    /inspection 							controllers.InspectionController.index()
+GET     /inspection 							controllers.InspectionController.index()
+GET     /inspection/new							controllers.InspectionController.create()
+POST    /inspection/new               			controllers.InspectionController.newInspection()
+POST    /inspection/update						controllers.InspectionController.updateInspection()
+GET     /inspection/:id/update					controllers.InspectionController.update(id: Long)
+POST    /inspection/:id/delete					controllers.InspectionController.deleteInspection(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

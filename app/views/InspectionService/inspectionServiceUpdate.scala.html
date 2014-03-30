@@ -47,9 +47,12 @@
 		Osoba nije na spisku? <a href="@routes.PersonController.create()" class='pull-right btn btn-sm btn-success'>Dodaj Osobu</a>
 		</section>
 
-		<input type="submit" value="Spremi promjene" class='btn btn-primary' > 
+		<input type="submit" value="Spremi promjene" class='btn btn-warning' > 
 	</div>
 } 
+@form(routes.InspectionServiceController.deleteInspectionService(service.id)) {
+			<input type="submit" value="Izbrisi" class='btn btn-danger' > 
+		}
 </div>
 
 }

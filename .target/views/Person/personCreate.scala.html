@@ -1,0 +1,41 @@
+@(personForm: Form[Person])
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@main("Dodaj osobu") {
+
+<div class="well col-md-5 col-md-offset-3">
+	<h2>Nova kontakt osoba</h2>
+
+	@form(routes.PersonController.newPerson()) {
+
+
+	<div class="form-group">
+		@inputText(personForm("name"),
+		'_label->"Ime i Prezime",
+		'_showConstraints -> false
+		) 
+
+		@inputText(personForm("phoneNumber"),
+		'_label->"Broj Telefona",
+		'_showConstraints -> false,
+		'_help->"+387xxxxxxxx"
+		)
+
+		@inputText(personForm("email"),
+		'_label->"E-mail",
+		'_showConstraints -> false
+		) 
+
+		@inputText(personForm("fax"),
+		'_label->"Fax",
+		'_showConstraints -> false,
+		'_help->"+387xxxxxxxx"
+		)
+		<input type="submit" value="Dodaj Kontakt Osobu" class='btn btn-primary' > 
+	</div>
+} 
+</div>
+
+}

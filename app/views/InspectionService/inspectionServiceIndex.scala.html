@@ -16,31 +16,34 @@
 			</div>
 			<div class="panel-body hidden">
 				<div class="col-md-5">
-				<h5> Inspekcijsko Tijelo </h5>
-					<span class='row'>
-					<p class='attributeName'> Inspekcijsko Tijelo: </p> <p> @inspectionService.name </p>
-					</span>
-					<span class='row'>
-					<p class='attributeName'> Inspektorat: </p> <p> @inspectionService.jurisdiction.name </p>
-					</span>
-					<span class='row'>
-					<p class='attributeName'> Nadleznost: </p> <p> @inspectionService.inspectorate.name </p>
-					</span>
+					<h5> Inspekcijsko Tijelo </h5>
+					<div>
+						<a href='@routes.InspectionServiceController.update(inspectionService.id)' class='btn btn-warning btn-sm'> Promjeni Podatke </a>
+					</div>
+					<div>
+						<p class='attributeName'> Inspekcijsko Tijelo: </p> <p> @inspectionService.name </p>
+					</div>
+					<div>
+						<p class='attributeName'> Inspektorat: </p> <p> @inspectionService.jurisdiction.name </p>
+					</div>
+					<div>
+						<p class='attributeName'> Nadleznost: </p> <p> @inspectionService.inspectorate.name </p>
+					</div>
 				</div>
 				<div class="col-md-5">
 					<h5> Kontakt Osoba </h5>
-					<span class='row'>
-					<p class='attributeName'> Ime i Prezime: </p> <p> @inspectionService.contactPerson.name </p>
-					</span>
-					<span class='row'>
-					<p class='attributeName'> Broj Telefona: </p> <p> @inspectionService.contactPerson.phoneNumber </p>
-					</span>
-					<span class='row'>
-					<p class='attributeName'> E-mail: </p> <p> @inspectionService.contactPerson.email </p>
-					</span>
-					<span class='row'>
-					<p class='attributeName'> Fax: </p> <p> @inspectionService.contactPerson.fax </p>
-					</span>
+					<div>
+						<p class='attributeName'> Ime i Prezime: </p> <p> @inspectionService.contactPerson.name </p>
+					</div>
+					<div>
+						<p class='attributeName'> Broj Telefona: </p> <p> @inspectionService.contactPerson.phoneNumber </p>
+					</div>
+					<div>
+						<p class='attributeName'> E-mail: </p> <p> @inspectionService.contactPerson.email </p>
+					</div>
+					<div>
+						<p class='attributeName'> Fax: </p> <p> @inspectionService.contactPerson.fax </p>
+					</div>
 				</div>
 			</div>
 		</div>

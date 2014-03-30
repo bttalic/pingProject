@@ -1,7 +1,7 @@
-@(inspectionServiceForm: Form[InspectionService],
- jurisdictions: Map[String, String],
+@(InspectionForm: Form[InspectionService],
+ products: Map[String, String],
  inspectorates: Map[String, String],
- people: Map[String, String]
+ inspectionServices: Map[String, String]
  )
 @import helper._
 @import helper.twitterBootstrap._
@@ -16,22 +16,22 @@
 
 
 	<div class="form-group">
-		@inputText(inspectionServiceForm("name"),
+		@inputText(InspectionForm("name"),
 		'_label->"Naziv inspekcijskog tijela",
 		'_showConstraints -> false
 		) 
 
-		@select(inspectionServiceForm("inspectorateId"), options(inspectorates),
+		@select(InspectionForm("inspectorateId"), options(inspectorates),
 		'_label->"Inspektorat",
 		'_showConstraints -> false
 		)
 
-		@select(inspectionServiceForm("jurisdictionId"), options(jurisdictions),
+		@select(InspectionForm("jurisdictionId"), options(products),
 		'_label->"Nadležnost",
 		'_showConstraints -> false
 		)
 
-		@select(inspectionServiceForm("personId"), options(people),
+		@select(InspectionForm("personId"), options(inspectionServices),
 		'_label->"Kontakt Osoba",
 		'_showConstraints -> false
 		)

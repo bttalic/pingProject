@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 public class Person extends Model {
 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id_seq")
 	@Id
 	public Long id;
 
@@ -32,9 +33,10 @@ public class Person extends Model {
 	public String fax;
 
 	public Person(){
-		name = "Nije Dostupno";
-		phoneNumber = "Nije Dostupno";
-		email = "Nije Dostupno";
+		String placeHolder = "Nije dostupno";
+		name = placeHolder;
+		phoneNumber = placeHolder;
+		email = placeHolder;
 	}
 
 	public static Finder<Long,Person> find = new Finder(
@@ -46,7 +48,13 @@ public class Person extends Model {
 	}
 
 	public static Person find(Long id){
-		return find.byId(id);
+		if( id == null )
+			return new Person();
+
+		Person thisPerson = find.byId(id);
+		if( thisPerson == null )
+			thisPerson = new Person();
+		return thisPerson;
 	}
 
 	public static Map allAsMap() {
@@ -74,6 +82,10 @@ public class Person extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
+
+	public static boolean exists(Long id){
+		return find.byId(id) != null;
+	}
 	
 	private  void copyValues(Person newValues){
 		this.name = newValues.name;
@@ -81,5 +93,7 @@ public class Person extends Model {
 		this.email = newValues.email;
 		this.fax = newValues.fax;
 	}
+
+	
 
 }
