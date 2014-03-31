@@ -82,10 +82,6 @@ public class Inspection extends Model {
 		return sdf.format(this.inspectionDate);
 	}
 
-	public String getDayDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(new Date());
-	}
 	
 	public static Map getInspectionDates() {
 		

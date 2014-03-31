@@ -85,8 +85,8 @@ public class InspectionService extends Model {
 
 	private static void loadAdditional(InspectionService current){
 		current.contactPerson = Person.find(current.personId);
-		current.jurisdiction = Jurisdiction.find(current.id);
-		current.inspectorate = Inspectorate.find(current.id);
+		current.jurisdiction = Jurisdiction.find(current.jurisdictionId);
+		current.inspectorate = Inspectorate.find(current.inspectorateId);
 	}
 
 	public static void create(InspectionService inspectionService) {

@@ -37,8 +37,10 @@ public class Jurisdiction extends Model {
 		if( id == null )
 			return new Jurisdiction();
 
-		Jurisdiction thisJurisdiction = find.byId(id);
-		if( thisJurisdiction == null )
+		Jurisdiction thisJurisdiction;
+		if( exists(id) == true )
+			thisJurisdiction = find.byId(id);
+		else
 			thisJurisdiction = new Jurisdiction();
 		return thisJurisdiction;
 	}
