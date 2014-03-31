@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-#GET     /                           			controllers.InspectionController.index()
+GET     /                           			controllers.InspectionController.index()
 
 GET     /product                   				controllers.ProductController.index()
 GET     /product/new							controllers.ProductController.create()
