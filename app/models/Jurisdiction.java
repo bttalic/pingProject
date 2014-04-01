@@ -1,60 +1,120 @@
 package models;
 
-import java.io.UnsupportedEncodingException;
 import java.util.*;
-
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
-
 import javax.persistence.*;
 
+/**
+ * Jurisdiction
+ * 
+ * Pomocni model za cuvanje podataka o nadleznosti u @see InspectionService
+ * modelu (Inspekcijsko Tijelo) Klasa nema settere jer nije predvideno
+ * ubacivanje podataka preko klase @see specifikacije zadatka
+ * 
+ * $LastChangedRevision: 01.04.2014 $LastChangedDate: 01.04.2014
+ */
+
+@SuppressWarnings("serial")
 @Entity
 public class Jurisdiction extends Model {
 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jurisdiction_id_seq")
 	@Id
-	public Long id;
+	private Long id;
 
 	@Required
 	@MinLength(value = 2)
 	@MaxLength(value = 16)
-	public String name;
+	private String name;
 
-	public Jurisdiction(){
-		String placeHolder = "Nije dostupno";
+	/**
+	 * Konstruktor za slucaj greske pri spremanju/ucitavanju podataka
+	 */
+	public Jurisdiction() {
+		String placeHolder = "NA";
 		name = placeHolder;
 	}
 
-	public static Finder<Long,Jurisdiction> find = new Finder(
-		Long.class, Jurisdiction.class
-		);
+	/**
+	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
+	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
+	 * proslijedena nedozvoljena vrijednost za id kreira default instancu
+	 * Jurisdiction klase
+	 * 
+	 * @param id
+	 *            id proizvoda
+	 */
+	public Jurisdiction(Long id) {
+		if (id == null)
+			new Jurisdiction();
 
-	public static List<Jurisdiction> all() {
-		return find.all();
-	}
-
-	public static Jurisdiction find(Long id){
-		if( id == null )
-			return new Jurisdiction();
-
-		Jurisdiction thisJurisdiction;
-		if( exists(id) == true )
-			thisJurisdiction = find.byId(id);
+		if (exists(id) == true)
+			copyValues(find.byId(id));
 		else
-			thisJurisdiction = new Jurisdiction();
-		return thisJurisdiction;
+			new Jurisdiction();
 	}
 
-	public static boolean exists(Long id){
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Varijabla sluzi kao konektor za bazu
+	 */
+	public static Finder<Long, Jurisdiction> find = new Finder<Long, Jurisdiction>(
+			Long.class, Jurisdiction.class);
+
+	/**
+	 * 
+	 * @return Listu nadleznosti iz baze poredanu po nazivu A-Z
+	 */
+	public static List<Jurisdiction> all() {
+		return find.order("name asc").findList();
+	}
+
+	/**
+	 * 
+	 * @param id
+	 *            id koji treba provjeriti
+	 * @return true ako nadleznost postoji u bazi, u suprotnom false
+	 */
+	public static boolean exists(Long id) {
 		return find.byId(id) != null;
 	}
 
-	public static Map allAsMap() {
+	/**
+	 * @return Mapa svih osoba u bazi, key je id nadleznosti a vrijednost ime
+	 *
+	 * @return HashMap<String, String>
+	 */
+	public static Map<String, String> allAsMap() {
 		List<Jurisdiction> list = all();
-		Map<String, String> hash = new HashMap();
-		for(int i = 0; i<list.size(); i++){
+		Map<String, String> hash = new HashMap<String, String>();
+		for (int i = 0; i < list.size(); i++) {
 			hash.put(String.valueOf(list.get(i).id), list.get(i).name);
 		}
 		return hash;
+	}
+
+	/**
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa Jurisdiction
+	 * 
+	 * @param old
+	 *            objekt tipa Jurisdiction koji sadrzi nove vrijednosti
+	 */
+	private void copyValues(Jurisdiction old) {
+		this.name = old.name;
+		this.id = old.id;
 	}
 }

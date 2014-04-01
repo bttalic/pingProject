@@ -12,27 +12,7 @@
 
 
 	<div class="form-group">
-		@inputText(personForm("name"),
-		'_label->"Ime i Prezime",
-		'_showConstraints -> false
-		) 
-
-		@inputText(personForm("phoneNumber"),
-		'_label->"Broj Telefona",
-		'_showConstraints -> false,
-		'_help->"+387xxxxxxxx"
-		)
-
-		@inputText(personForm("email"),
-		'_label->"E-mail",
-		'_showConstraints -> false
-		) 
-
-		@inputText(personForm("fax"),
-		'_label->"Fax",
-		'_showConstraints -> false,
-		'_help->"+387xxxxxxxx"
-		)
+		@_personForm(personForm)
 		<input type="submit" value="Dodaj Kontakt Osobu" class='btn btn-primary' > 
 	</div>
 } 

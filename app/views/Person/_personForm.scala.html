@@ -1,0 +1,26 @@
+@(personForm: Form[Person])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@inputText(personForm("name"),
+'_label->"Ime i Prezime",
+'_showConstraints -> false
+) 
+
+@inputText(personForm("phoneNumber"),
+'_label->"Broj Telefona",
+'_showConstraints -> false,
+'_help->"+387xxxxxxxx"
+)
+
+@inputText(personForm("email"),
+'_label->"E-mail",
+'_showConstraints -> false
+) 
+
+@inputText(personForm("fax"),
+'_label->"Fax",
+'_showConstraints -> false,
+'_help->"+387xxxxxxxx"
+)

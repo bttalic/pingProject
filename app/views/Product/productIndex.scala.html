@@ -3,68 +3,50 @@
 @import helper.twitterBootstrap._
 @main("Proizvodi") {
 
+
 <div class="col-md-6" id='productIndex'>   
-    <table class='table table-striped'> 
-        <thead>
-            <tr class="active"> <th> Naziv Proizvoda </th> <th> Proizvođač </th> <th> Zemlja porijekla </th> <th> Serijski broj </th> 
-                <th> Opis </th>
-            </thead>
-            <tbody>
-            </tr>
-            @if(products.size() > 0 ){
-            @for(product <- products) {
-            <tr objectId = "@product.id">
-                <td field="name"> @product.name </td> <td field="manufacturer"> @product.manufacturer </td>
-                 <td field="countryOfOrigin" > @product.countryOfOrigin </td>
-                <td field="serialNumber"> @product.serialNumber </td> <td field="description"> @product.description </td>
-            </tr>         
-        }  
-        } else {
-            <tr> <td> Nema proizvoda </td> </tr>
-        }
-    </tbody>
+  <table class='table table-striped'> 
+    <thead>
+      <tr class="active"> <th> Naziv Proizvoda </th> <th> Proizvođač </th> <th> Zemlja porijekla </th> <th> Serijski broj </th> 
+        <th> Opis </th>
+      </thead>
+      <tbody>
+      </tr>
+      @if(products.size() > 0 ){
+      @for(product <- products) {
+      <tr objectId = "@product.getId()">
+        <td field="name"> @product.getName() </td> <td field="manufacturer"> @product.getManufacturer() </td>
+        <td field="countryOfOrigin" > @product.getCountryOfOrigin </td>
+        <td field="serialNumber"> @product.getSerialNumber() </td> <td field="description"> @product.getDescription() </td>
+      </tr>         
+    }  
+  } else {
+  <tr> <td> Nema proizvoda </td> </tr>
+}
+</tbody>
 </table>
 </div>
 
 <div class="col-md-5 col-md-offset-1">
-    <div class="panel panel-primary hidden">
-      <div class="panel-heading">
-          <div class="btn-group">
-             <button id='saveChanges' class='btn btn-sm btn-warning'> Spremi Promjene </button>
-             <button id='deleteProduct' class='btn btn-sm btn-danger'> Izbrisi Proizvod </button>
-         </div>
+  <div class="panel panel-primary hidden">
+    <div class="panel-heading">
+      <div class="btn-group">
+       <button id='saveChanges' class='btn btn-sm btn-warning'> Spremi Promjene </button>
+       <button id='deleteProduct' class='btn btn-sm btn-danger'> Izbrisi Proizvod </button>
      </div>
-     <div class="panel-body">
-        @form(routes.ProductController.updateProduct(), 'id->"updateForm") {
-        <div class="form-group">
-          @inputText(productForm("name"),
-          '_label->"Naziv Proizvoda",
-          '_showConstraints -> false
-          ) 
-
-          @inputText(productForm("manufacturer"),
-          '_label->"Proizvođač",
-          '_showConstraints -> false
-          )
-
-          @inputText(productForm("countryOfOrigin"),
-          '_label->"Zemlja porijekla",
-          '_showConstraints -> false
-          ) 
-
-          @inputText(productForm("serialNumber"),
-          '_label->"Serijski broj", '_showConstraints -> false)
-
-
-          @textarea(field = productForm("description"), args = 'rows -> 3, 'cols -> 50,'_label->"Opis",
-          '_showConstraints -> false)
-      }
-      
+   </div>
+   <div class="panel-body">
+    @form(routes.ProductController.updateProduct(), 'id->"updateForm") {
+    <div class="form-group">
+      @_productForm(productForm)
       @inputText(productForm("id"),
       '_label->"",
       'class -> "hidden"
       ) 
-      
+    }
+    
+    
+    
   </div>
 </div>
 </div>

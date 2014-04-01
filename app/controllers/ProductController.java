@@ -1,7 +1,6 @@
 package controllers;
 
 
-import play.*;
 import play.mvc.*;
 import play.data.*;
 import models.*;
@@ -45,7 +44,7 @@ public class ProductController extends Controller {
     
     public static Result updateProduct() {
     	refreshFilledForm();
-    	if(filledForm.hasErrors()) {
+    	if(filledForm.hasErrors() ) {
     		return redirect(routes.ProductController.index());
 		  } else {
 			Product.updateProduct(filledForm.get());

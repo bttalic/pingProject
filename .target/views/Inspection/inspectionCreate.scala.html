@@ -6,10 +6,10 @@ products: Map[String, String]
 @import helper.twitterBootstrap._
 
 
-@main("Dodaj Inspekcijsko Tijelo") {
+@main("Dodaj Inspekcijsku Kontrolu") {
 
 <div class="well col-md-5 col-md-offset-3">
-	<h2>Novo inspekcijsko tijelo</h2>
+	<h2>Nova inspekcijska kontrola</h2>
 
 	@form(routes.InspectionController.newInspection()) {
 
@@ -21,12 +21,12 @@ products: Map[String, String]
 		)
 
 		@select(inspectionForm("inspectionServiceId"), options(inspectionServices),
-		'_label->"Nadležnost",
+		'_label->"Inspekcijsko Tijelo",
 		'_showConstraints -> false
 		) 
 
 		@select(inspectionForm("productId"), options(products),
-		'_label->"Inspektorat",
+		'_label->"Kontrolisani Proizvod",
 		'_showConstraints -> false
 		)
 

@@ -1,10 +1,8 @@
 package controllers;
 
-import play.*;
 import play.mvc.*;
 import play.data.*;
 import models.*;
-import views.html.*;
 
 
 
@@ -30,7 +28,7 @@ public class InspectionServiceController extends Controller {
 
 	public static Result update(Long id) {
 		if( InspectionService.exists(id) == true ){
-			InspectionService thisService = InspectionService.find(id);
+			InspectionService thisService = new InspectionService(id);
 			inspectionServiceForm = Form.form(InspectionService.class);
 			inspectionServiceForm = inspectionServiceForm.fill(thisService);
 			return ok (views.html.InspectionService.inspectionServiceUpdate.render(
@@ -57,7 +55,7 @@ public class InspectionServiceController extends Controller {
 	public static Result updateInspectionService() {
 		refreshFilledForm();
 		if(filledForm.hasErrors()) {
-			return redirect(routes.InspectionServiceController.update(inspectionServiceForm.get().id));
+			return redirect(routes.InspectionServiceController.update(inspectionServiceForm.get().getId()));
 		} else {
 			InspectionService.updateInspectionService(filledForm.get());
 			cleanForms();

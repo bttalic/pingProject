@@ -1,0 +1,10 @@
+@(inspectionService: InspectionService)
+<div>
+	<p class='attributeName'> Inspekcijsko Tijelo: </p> <p> @inspectionService.getName() </p>
+</div>
+<div>
+	<p class='attributeName'> Inspektorat: </p> <p> @inspectionService.jurisdiction.getName() </p>
+</div>
+<div>
+	<p class='attributeName'> Nadleznost: </p> <p> @inspectionService.inspectorate.getName() </p>
+</div>

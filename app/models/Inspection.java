@@ -1,8 +1,5 @@
 package models;
 
-import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -11,11 +8,8 @@ import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.ExpressionList;
-import com.avaje.ebean.Query;
 
-
+@SuppressWarnings("serial")
 @Entity
 public class Inspection extends Model {
 	
@@ -41,7 +35,7 @@ public class Inspection extends Model {
 	public Product product;
 	public InspectionService inspectionService;
 	
-	public static Finder<Long,Inspection> find = new Finder(
+	public static Finder<Long,Inspection> find = new Finder<Long, Inspection>(
 		Long.class, Inspection.class
 		);
 	
@@ -60,14 +54,12 @@ public class Inspection extends Model {
 		return thisInspection;
 	}
 
+	@SuppressWarnings("unused")
 	private static void loadAdditional(Inspection current){
-		InspectionService thisSevice = InspectionService.find(current.inspectionServiceId);
-			Product thisProduct = Product.find(current.productId);
+		InspectionService thisSevice = new InspectionService(current.inspectionServiceId);
+			Product thisProduct = new Product(current.productId);
 			if( thisSevice == null) {
 				thisSevice = new InspectionService();
-			}
-			if( thisProduct == null) {
-				thisProduct = new Product();
 			}
 			current.inspectionService = thisSevice;
 			current.product = thisProduct;
@@ -83,9 +75,9 @@ public class Inspection extends Model {
 	}
 
 	
-	public static Map getInspectionDates() {
+	public static Map<String, String> getInspectionDates() {
 		
-		Map<String, String> dates = new HashMap();
+		Map<String, String> dates = new HashMap<String, String>();
 		List<Inspection> all = find.setDistinct(true).select("inspection_date").findList();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

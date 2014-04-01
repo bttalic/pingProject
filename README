@@ -1,4 +1,30 @@
-This is your new Play application
-=====================================
+Projektni zadatak
 
-This file will be packaged with your application, when using `play dist`.
+Za potrebe kontrole kvaliteta i ispravnosti proizvoda na tržištu BiH  potrebno je dizajnirati sistem koji će omogućiti evidenciju i pregled izvršenih inspekcijskih kontrola registrovanih proizvoda od strane inspekcijskih tijela evidentiranih u sistemu. 
+U tu svrhu potrebno je realizirati slijedeće:
+1.	Evidenciju (unos, izmjenu i brisanje) proizvoljnog broja proizvoda, pri čemu je za svaki proizvod neophodno unijeti:
+-	Naziv proizvoda
+-	Proizvođač
+-	Serijski broj (opcionalno)
+-	Zemlja porijekla
+-	Opis (opcionalno)
+2.	Evidenciju proizvoljnog broja inspekcijskog tijela, pri čemu je za svako inspekcijsko tijelo neophodno unijeti:
+-	Naziv inspekcijskog tijela
+-	Inspektorat (lista vrijednosti: FBiH, RS, Disktrit Brčko)
+-	Nadležnost (lista vrijednosti: Tržišna inspekcija, Zdravstveno – sanitarna inspekcija)
+-	Kontakt osoba 
+3.	Evidenciju (unos, izmjenu i brisanje) proizvoljnog broja inspekcijskih kontrola pri čemu je za svaku inspekcijsku kontrolu neophodno navesti:
+-	Datum inspekcijske kontrole
+-	Nadležno inspekcijsko tijelo (vrijednost izabrana iz liste evidentiranih inspekcijskih tijela)
+-	Kontrolisani proizvod (vrijednost izabrana iz liste evidentiranih proizvoda)
+-	Rezultati kontrole (tekstualni opis)
+-	Proizvod siguran (True/False vrijednost)
+4.	Pregled svih izvršenih inspekcijskih kontrola za izabrano inspekcijsko za izabrani vremenski period sortiran po datumu kontrole, 
+ 
+
+5.	Pregled detalja izabrane inspekcijske kontrole, tačnije:
+-	Detalji kontrolisanog proizvoda (serijski broj, naziv, zemlja porijekla),
+-	Datum i vrijeme kontrole,
+-	Rezultati kontrole
+Zahtjevi iz 4. i 5. se po želji mogu realizirati u obliku statičkog izvještaja ili interaktivnog pregleda u sklopu aplikacije.
+Rješenje bi trebalo biti implementirano u obliku web bazirane aplikacije (dostupne kroz web preglednik)

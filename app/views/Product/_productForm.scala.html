@@ -1,0 +1,26 @@
+@(productForm: Form[Product])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@inputText(productForm("name"),
+'_label->"Naziv Proizvoda",
+'_showConstraints -> false
+) 
+
+@inputText(productForm("manufacturer"),
+'_label->"Proizvođač",
+'_showConstraints -> false
+)
+
+@inputText(productForm("countryOfOrigin"),
+'_label->"Zemlja porijekla",
+'_showConstraints -> false
+) 
+
+@inputText(productForm("serialNumber"),
+'_label->"Serijski broj", '_showConstraints -> false)
+
+
+@textarea(field = productForm("description"), args = 'rows -> 3, 'cols -> 50,'_label->"Opis",
+'_showConstraints -> false)

@@ -1,125 +1,262 @@
 package models;
 
-import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
-
 import javax.persistence.*;
 
-import com.avaje.ebean.Query;
-
+@SuppressWarnings("serial")
 @Entity
 public class InspectionService extends Model {
 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inspection_service_id_seq")
 	@Id
-	public Long id;
+	private Long id;
 
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
-	public String name;
+	private String name;
 
 	@Required
-	public Long inspectorateId;
+	private Long inspectorateId;
 
 	@Required
-	public Long jurisdictionId;
+	private Long jurisdictionId;
 
 	@Required
-	public Long personId;
+	private Long personId;
 
 	public Person contactPerson;
 	public Jurisdiction jurisdiction;
 	public Inspectorate inspectorate;
 
-	public InspectionService(){
-		String placeHolder = "Nije dostupno";
+	/**
+	 * Kreira novu instancu klase Product, ovaj konstruktor sluzi za slucajeve
+	 * gdje je proizvod izbrisan iz baze, ali zelimo zadrzati izvjestaj. Sve
+	 * varijable ce imati vrijednost "Nije dostupno"
+	 * */
+	public InspectionService() {
+		String placeHolder = "NA";
 		name = placeHolder;
+		inspectorateId = null;
+		jurisdictionId = null;
+		personId = null;
 	}
 
-	public static Finder<Long,InspectionService> find = new Finder(
-		Long.class, InspectionService.class
-		);
+	/**
+	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
+	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
+	 * proslijedena nedozvoljena vrijednost za id kreira default instancu
+	 * InspectionService klase
+	 * 
+	 * @param id
+	 *            id inspekcijskog tijela
+	 */
+	public InspectionService(Long id) {
+		if (id == null)
+			new InspectionService();
 
+		if (exists(id)) {
+			copyValues(find.byId(id));
+			loadAdditional(this);
+		}
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the inspectorateId
+	 */
+	public Long getInspectorateId() {
+		return inspectorateId;
+	}
+
+	/**
+	 * @param inspectorateId
+	 *            the inspectorateId to set
+	 */
+	public void setInspectorateId(Long inspectorateId) {
+		this.inspectorateId = inspectorateId;
+	}
+
+	/**
+	 * @return the jurisdictionId
+	 */
+	public Long getJurisdictionId() {
+		return jurisdictionId;
+	}
+
+	/**
+	 * @param jurisdictionId
+	 *            the jurisdictionId to set
+	 */
+	public void setJurisdictionId(Long jurisdictionId) {
+		this.jurisdictionId = jurisdictionId;
+	}
+
+	/**
+	 * @return the personId
+	 */
+	public Long getPersonId() {
+		return personId;
+	}
+
+	/**
+	 * @param personId
+	 *            the personId to set
+	 */
+	public void setPersonId(Long personId) {
+		this.personId = personId;
+	}
+
+	/**
+	 * Varijabla sluzi kao konektor za bazu
+	 */
+	public static Finder<Long, InspectionService> find = new Finder<Long, InspectionService>(
+			Long.class, InspectionService.class);
+
+	/**
+	 * 
+	 * @return Listu nadleznih tijela iz baze poredanu po imenu proizvoda A-Z
+	 */
 	public static List<InspectionService> all() {
-		List<InspectionService> all = find.all();
-		for(int i = 0; i<all.size(); i++){
+		List<InspectionService> all = find.order("name asc").findList();
+		for (int i = 0; i < all.size(); i++) {
 			InspectionService current = all.get(i);
-			Person thisPerson = Person.find(current.personId);
-			if( thisPerson == null) {
-				thisPerson = new Person();
-			}
-			current.contactPerson = thisPerson;
-			current.jurisdiction = Jurisdiction.find(current.jurisdictionId);
-			current.inspectorate = Inspectorate.find(current.inspectorateId);
+			loadAdditional(current);
 		}
 		return all;
 	}
 
-	public static Map allAsMap() {
+	/**
+	 * Da bi sprijecili probleme sa brisanjem podataka ova klasa ne drzi
+	 * direktno instance druge klase nego id vrijednosti preko kojih se u ovoj
+	 * metodi te instance kreiraju
+	 * 
+	 * @param current
+	 *            instanca klase
+	 */
+	private static void loadAdditional(InspectionService current) {
+		current.contactPerson = new Person(current.personId);
+		current.jurisdiction = new Jurisdiction(current.jurisdictionId);
+		current.inspectorate = new Inspectorate(current.inspectorateId);
+	}
+
+	/**
+	 * @return Mapa svih inspekcijskih tijela u bazi, key je id proizvoda a
+	 *         vrijednost
+	 * 
+	 * @return HashMap<String, String>
+	 */
+	public static Map<String, String> allAsMap() {
 		List<InspectionService> list = all();
-		Map<String, String> hash = new HashMap();
-		for(int i = 0; i<list.size(); i++){
+		Map<String, String> hash = new HashMap<String, String>();
+		for (int i = 0; i < list.size(); i++) {
 			InspectionService current = list.get(i);
 			hash.put(String.valueOf(current.id), current.name);
 		}
 		return hash;
 	}
 
-	public static InspectionService find(Long id){
-		InspectionService thisService;
-		if( id == null)
-			thisService = new InspectionService();
-		else
-			thisService = find.byId(id);
-		if( thisService == null)
-			thisService = new InspectionService();
-		
-		loadAdditional(thisService);
-		return thisService;
-	}
-
-	private static void loadAdditional(InspectionService current){
-		current.contactPerson = Person.find(current.personId);
-		current.jurisdiction = Jurisdiction.find(current.jurisdictionId);
-		current.inspectorate = Inspectorate.find(current.inspectorateId);
-	}
-
-	public static void create(InspectionService inspectionService) {
-		inspectionService.save();
-	}
-
-	public static void updateInspectionService(InspectionService newValues) {
-		InspectionService inspectionService = find.byId(newValues.id);
-		if(inspectionService != null){
-			inspectionService.copyValues(newValues);
-			inspectionService.update();
-		}
-	}
-
-	public static void delete(Long id) {
-		find.ref(id).delete();
-	}
-
-	public static Map getInspectionServices(){
-		Map<String, String> services = new HashMap();
-		List<InspectionService> all = find.setDistinct(true).select("name, id").findList();
+	/**
+	 * Mapa inspekcijskih tijela sa dodanom vrijednoscu <-1, Svi> u tome se
+	 * razlikuje od allAsMap() mapa se koristi za izbornik pretrage
+	 * 
+	 * @see allAsMap()
+	 * 
+	 * @return HashMap key je id a vrijednost ime
+	 */
+	public static Map<String, String> getInspectionServices() {
+		Map<String, String> services = new HashMap<String, String>();
+		List<InspectionService> all = find.setDistinct(true).select("name, id")
+				.findList();
 		services.put("-1", "Svi");
-		for(int i=0; i<all.size(); i++){
+		for (int i = 0; i < all.size(); i++) {
 			services.put(all.get(i).id.toString(), all.get(i).name);
 		}
 		return services;
 	}
 
-	public static boolean exists(Long id){
+	/**
+	 * Spasava inspekcijsko tijelo u bazu
+	 * 
+	 * @param inspectionService
+	 */
+	public static void create(InspectionService inspectionService) {
+		inspectionService.save();
+	}
+
+	/**
+	 * Spasava promjene u bazu
+	 * 
+	 * @param newValues
+	 *            Objekt tipa InspectionService u kojem su nove vrijednosti
+	 */
+	public static void updateInspectionService(InspectionService newValues) {
+		InspectionService inspectionService = find.byId(newValues.id);
+		if (inspectionService != null) {
+			inspectionService.copyValues(newValues);
+			inspectionService.update();
+		}
+	}
+
+	/**
+	 * Brise inspekcijsko tijelo iz baze i skriva sve izvjestaje vezane za to
+	 * inspekcijsko tijelo
+	 * 
+	 * @param id
+	 */
+	// TODO Uraditi skrivanje inspekcijskog tijela
+	public static void delete(Long id) {
+		find.ref(id).delete();
+	}
+
+	/**
+	 * 
+	 * @param id
+	 *            id koji treba provjeriti
+	 * @return true ako inspekcijsko tijelo postoji u bazi, u suprotnom false
+	 */
+	public static boolean exists(Long id) {
 		return find.byId(id) != null;
 	}
-	
-	private  void copyValues(InspectionService newValues){
+
+	/**
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa InspectionService
+	 * 
+	 * @param newValues
+	 *            objekt tipa InspectionService koji sadrzi nove vrijednosti
+	 */
+	private void copyValues(InspectionService newValues) {
 		this.name = newValues.name;
 		this.inspectorateId = newValues.inspectorateId;
 		this.jurisdictionId = newValues.jurisdictionId;
