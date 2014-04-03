@@ -13,30 +13,10 @@ products: Map[String, String]
 
 	@form(routes.InspectionController.newInspection()) {
 
+		@_inspectionForm(inspectionForm, inspectionServices, products)
 
 	<div class="form-group">
-		@inputText(inspectionForm("inspectionDate"),
-		'_label->"Datum Kontrole",
-		'_showConstraints -> false
-		)
 
-		@select(inspectionForm("inspectionServiceId"), options(inspectionServices),
-		'_label->"Inspekcijsko Tijelo",
-		'_showConstraints -> false
-		) 
-
-		@select(inspectionForm("productId"), options(products),
-		'_label->"Kontrolisani Proizvod",
-		'_showConstraints -> false
-		)
-
-		@select(inspectionForm("safe"), options("0"->"Nije Siguran", "1"->"Siguran"),
-		'_label->"Proizvod Siguran?",
-		'_showConstraints -> false
-		)
-
-		@textarea(field = inspectionForm("inspectionResult"), args = 'rows -> 3, 'cols -> 50,'_label->"Rezultat Kontrole",
-		'_showConstraints -> false)
 
 		<input type="submit" value="Dodaj izvještaj" class='btn btn-primary' > 
 	</div>

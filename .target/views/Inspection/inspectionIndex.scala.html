@@ -11,8 +11,13 @@ inspectionDates: Map[String, String], inspectionServices: Map[String, String])
 
 	<div class="form-inline">
 
-		@select(searchForm("inspectionDate"), options(inspectionDates),
-		'_label->"Datum",
+		@select(searchForm("inspectionDateStart"), options(inspectionDates),
+		'_label->"Pocetni Datum",
+		'_showConstraints -> false
+		)
+		
+		@select(searchForm("inspectionDateEnd"), options(inspectionDates),
+		'_label->"Zavrsni Datum",
 		'_showConstraints -> false
 		)
 
@@ -33,56 +38,37 @@ inspectionDates: Map[String, String], inspectionServices: Map[String, String])
 	<li>
 		<div class="panel panel-@inspection.getCSSClass()">
 			<div class="panel-heading">
-				<h1 class="panel-title"> @inspection.product.name | @inspection.getDate()</h1>
+				<h1 class="panel-title"> @inspection.product.getName() | @inspection.getDate()</h1>
 			</div>
 			<div class="panel-body hidden">
 				<h2> Inspekcijski Izvještaj </h2>
-				<a href='@routes.InspectionController.update(inspection.id)' class='btn btn-warning btn-sm'> Promjeni Podatke </a>
+				<a href='@routes.InspectionController.update(inspection.getId())' class='btn btn-warning btn-sm'> Promjeni Podatke </a>
 				<div class='row'>
 					<div class="col-md-6">
 						<div >
 							<h3> Datum Kontrole: </h3> <p> @inspection.getDate() </p>
 						</div>
 						<h3> Inspekcijsko Tijelo: </h3>
-						<div >
-							<p class="attributeName"> Ime: </p> <p> @inspection.inspectionService.name </p>
-						</div>
-						<div >
-							<p class="attributeName"> Inspektorat: </p> <p> @inspection.inspectionService.inspectorate.name </p>
-						</div>
-						<div >
-							<p class="attributeName"> Nadleznost: </p> <p> @inspection.inspectionService.jurisdiction.name </p>
-						</div>
+						@views.html.InspectionService._inspectionServiceDisplay(inspection.inspectionService)
 						<h2> Kontakt osoba: </h2>
-						<div >
-							<p class="attributeName"> Ime: </p> <p> @inspection.inspectionService.contactPerson.name </p>
-						</div>
-						<div >
-							<p class="attributeName"> Telefon: </p> <p> @inspection.inspectionService.contactPerson.phoneNumber </p>
-						</div>
-						<div >
-							<p class="attributeName"> Email: </p> <p> @inspection.inspectionService.contactPerson.email </p>
-						</div>
-						<div >
-							<p class="attributeName"> Fax: </p> <p> @inspection.inspectionService.contactPerson.fax </p>
-						</div>
+						@views.html.Person._personDisplay(inspection.inspectionService.contactPerson)
 					</div>
 					<div class="col-md-6">
 						<h2> Kontrolisani Proizvod: </h2>
 						<div >
-							<p class='attributeName'> Naziv: </p> <p> @inspection.product.name </p>
+							<p class='attributeName'> Naziv: </p> <p> @inspection.product.getName() </p>
 						</div>
 						<div >
-							<p class='attributeName'> Proizvodac: </p> <p> @inspection.product.manufacturer </p>
+							<p class='attributeName'> Proizvodac: </p> <p> @inspection.product.getManufacturer() </p>
 						</div>
 						<div >
-							<p class='attributeName'> Zemlja porijekla: </p> <p> @inspection.product.countryOfOrigin </p>
+							<p class='attributeName'> Zemlja porijekla: </p> <p> @inspection.product.getCountryOfOrigin() </p>
 						</div>
 						<div >
-							<p class='attributeName'> Serijski broj: </p> <p> @inspection.product.serialNumber </p>
+							<p class='attributeName'> Serijski broj: </p> <p> @inspection.product.getSerialNumber() </p>
 						</div>
 						<div >
-							<p class='attributeName'> Opis: </p> <p> @inspection.product.description </p>
+							<p class='attributeName'> Opis: </p> <p> @inspection.product.getDescription() </p>
 						</div>
 						<h2> Ocjena sigurnosti </h2>
 						<div >
@@ -92,7 +78,7 @@ inspectionDates: Map[String, String], inspectionServices: Map[String, String])
 				</div>
 				<div class="col-md">
 					<h2> Rezultat kontrole: </h2>
-					<p> @inspection.inspectionResult </p>
+					<p> @inspection.getInspectionResult() </p>
 				</div>
 			</div>
 		</div>

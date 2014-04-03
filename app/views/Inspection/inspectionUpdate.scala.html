@@ -16,25 +16,7 @@ inspection: Inspection
 
 
 	<div class="form-group">
-		@inputText(inspectionForm("inspectionDate"),
-		'_label->"Datum Kontrole",
-		'_showConstraints -> false
-		)
-
-		@select(inspectionForm("inspectionServiceId"), options(inspectionServices),
-		'_label->"Nadležnost",
-		'_showConstraints -> false
-		) 
-
-		@select(inspectionForm("productId"), options(products),
-		'_label->"Inspektorat",
-		'_showConstraints -> false
-		)
-
-		@select(inspectionForm("safe"), options("0"->"Nije Siguran", "1"->"Siguran"),
-		'_label->"Proizvod Siguran?",
-		'_showConstraints -> false
-		)
+@_inspectionForm(inspectionForm, inspectionServices, products)
 
 		@inputText(inspectionForm("id"),
 		'_label->"Id",
@@ -42,13 +24,10 @@ inspection: Inspection
 		'_class->"hidden"
 		) 
 
-		@textarea(field = inspectionForm("inspectionResult"), args = 'rows -> 3, 'cols -> 50,'_label->"Rezultat Kontrole",
-		'_showConstraints -> false)
-
 		<input type="submit" value="Spremi promjene" class='btn btn-warning' > 
 	</div>
 } 
-@form(routes.InspectionController.deleteInspection(inspection.id)) {
+@form(routes.InspectionController.deleteInspection(inspection.getId())) {
 			<input type="submit" value="Izbrisi" class='btn btn-danger' > 
 		}
 </div>

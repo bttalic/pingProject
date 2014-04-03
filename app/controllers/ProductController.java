@@ -4,7 +4,6 @@ package controllers;
 import play.mvc.*;
 import play.data.*;
 import models.*;
-import views.html.*;
 
 public class ProductController extends Controller {
 	

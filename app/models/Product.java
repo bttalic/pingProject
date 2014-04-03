@@ -218,7 +218,7 @@ public class Product extends Model {
 	 * @param serialNumber
 	 */
 	public void setSerialNumber(String serialNumber) {
-		if (countryOfOrigin.length() > 3 && countryOfOrigin.length() < 50)
+		if (serialNumber.length() >= 3 && serialNumber.length() <= 50)
 			this.serialNumber = serialNumber;
 	}
 
@@ -299,8 +299,13 @@ public class Product extends Model {
 	 * 
 	 * @param id
 	 */
-	// TODO Uraditi skrivanje izvjestaja
 	public static void delete(Long id) {
+		List<Inspection> inspections = Inspection.getFind()
+				.where()
+				.eq("product_id", id)
+				.findList();
+		for(int i = 0; i<inspections.size(); i++)
+			inspections.get(i).delete();
 		find.ref(id).delete();
 	}
 

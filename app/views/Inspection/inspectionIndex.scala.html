@@ -11,8 +11,13 @@ inspectionDates: Map[String, String], inspectionServices: Map[String, String])
 
 	<div class="form-inline">
 
-		@select(searchForm("inspectionDate"), options(inspectionDates),
-		'_label->"Datum",
+		@select(searchForm("inspectionDateStart"), options(inspectionDates),
+		'_label->"Pocetni Datum",
+		'_showConstraints -> false
+		)
+		
+		@select(searchForm("inspectionDateEnd"), options(inspectionDates),
+		'_label->"Zavrsni Datum",
 		'_showConstraints -> false
 		)
 
@@ -37,7 +42,7 @@ inspectionDates: Map[String, String], inspectionServices: Map[String, String])
 			</div>
 			<div class="panel-body hidden">
 				<h2> Inspekcijski Izvještaj </h2>
-				<a href='@routes.InspectionController.update(inspection.id)' class='btn btn-warning btn-sm'> Promjeni Podatke </a>
+				<a href='@routes.InspectionController.update(inspection.getId())' class='btn btn-warning btn-sm'> Promjeni Podatke </a>
 				<div class='row'>
 					<div class="col-md-6">
 						<div >
@@ -73,7 +78,7 @@ inspectionDates: Map[String, String], inspectionServices: Map[String, String])
 				</div>
 				<div class="col-md">
 					<h2> Rezultat kontrole: </h2>
-					<p> @inspection.inspectionResult </p>
+					<p> @inspection.getInspectionResult() </p>
 				</div>
 			</div>
 		</div>

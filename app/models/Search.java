@@ -11,9 +11,14 @@ import java.util.Date;
  */
 public class Search {
 	/**
-	 * Izabrani datum
+	 * Izabrani pocetni datum
 	 */
-	public Date inspectionDate;
+	public Date inspectionDateStart;
+	/**
+	 * Izabrani zavrsni datum
+	 */
+	public Date inspectionDateEnd;
+	
 	/**
 	 * Izabrano Inspekcijsko tijelo 
 	 */

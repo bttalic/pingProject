@@ -1,7 +1,7 @@
-@(InspectionForm: Form[InspectionService],
- products: Map[String, String],
+@(inspectionServiceForm: Form[InspectionService],
+ jurisdictions: Map[String, String],
  inspectorates: Map[String, String],
- inspectionServices: Map[String, String]
+ people: Map[String, String]
  )
 @import helper._
 @import helper.twitterBootstrap._
@@ -16,25 +16,7 @@
 
 
 	<div class="form-group">
-		@inputText(InspectionForm("name"),
-		'_label->"Naziv inspekcijskog tijela",
-		'_showConstraints -> false
-		) 
-
-		@select(InspectionForm("inspectorateId"), options(inspectorates),
-		'_label->"Inspektorat",
-		'_showConstraints -> false
-		)
-
-		@select(InspectionForm("jurisdictionId"), options(products),
-		'_label->"Nadležnost",
-		'_showConstraints -> false
-		)
-
-		@select(InspectionForm("personId"), options(inspectionServices),
-		'_label->"Kontakt Osoba",
-		'_showConstraints -> false
-		)
+		@_inspectionServiceForm(inspectionServiceForm, jurisdictions, inspectorates, people)
 		<section class="alert alert-info">
 		Osoba nije na spisku? <a href="@routes.PersonController.create()" class='pull-right btn btn-sm btn-success'>Dodaj Osobu</a>
 		</section>

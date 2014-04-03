@@ -240,12 +240,12 @@ public class Person extends Model {
 	}
 
 	/**
-	 * Brise osobu iz baze i skriva sva inspekcijska tijela vezane za taj
-	 * proizvod
+	 * Brise osobu iz baze, izbjegnuto je brisanje inspekcijskih tijela
+	 * povezanih s tim osobama da bi se omogucilo dodavanje druge osobe
+	 * umjesto gubljenja inspkecijskih tijela i povezanih kontrola
 	 * 
 	 * @param id
 	 */
-	// TODO Uraditi skrivanje Inspekcijskog tijela
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}

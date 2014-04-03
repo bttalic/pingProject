@@ -1,0 +1,27 @@
+@(InspectionForm: Form[InspectionService],
+ jurisdictions: Map[String, String],
+ inspectorates: Map[String, String],
+ people: Map[String, String]
+ )
+@import helper._
+@import helper.twitterBootstrap._
+
+@inputText(InspectionForm("name"),
+		'_label->"Naziv inspekcijskog tijela",
+		'_showConstraints -> false
+		) 
+
+		@select(InspectionForm("inspectorateId"), options(inspectorates),
+		'_label->"Inspektorat",
+		'_showConstraints -> false
+		)
+
+		@select(InspectionForm("jurisdictionId"), options(jurisdictions),
+		'_label->"Nadležnost",
+		'_showConstraints -> false
+		)
+
+		@select(InspectionForm("personId"), options(people),
+		'_label->"Kontakt Osoba",
+		'_showConstraints -> false
+		)

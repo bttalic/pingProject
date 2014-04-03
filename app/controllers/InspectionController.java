@@ -22,12 +22,13 @@ public class InspectionController extends Controller {
 				)
 			);
 		} else {
-			Date date = filledSearch.get().inspectionDate;
+			Date dateStart = filledSearch.get().inspectionDateStart;
+			Date dateEnd = filledSearch.get().inspectionDateEnd;
 			Long serviceId = filledSearch.get().inspectionServiceId;
 			
 			return ok(
 					views.html.Inspection.inspectionIndex.render(
-						Inspection.filtered(date, serviceId),
+						Inspection.filtered(dateStart, dateEnd, serviceId),
 						filledSearch, Inspection.getInspectionDates(), InspectionService.getInspectionServices()
 						)
 					);
@@ -72,7 +73,7 @@ public class InspectionController extends Controller {
 	public static Result updateInspection() {
 		refreshFilledForm();
 		if(filledForm.hasErrors()) {
-			return redirect(routes.InspectionController.update(inspectionForm.get().id));
+			return redirect(routes.InspectionController.update(inspectionForm.get().getId()));
 		} else {
 			Inspection.updateInspection(filledForm.get());
 			cleanForms();

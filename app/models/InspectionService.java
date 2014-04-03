@@ -5,6 +5,16 @@ import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
+
+/**
+ * InspectionService
+ * 
+ * klasa sluzi kao model za entity inspekcijsko tijelo
+ * 
+ * 
+ * $LastChangedRevision: 01.04.2014 $LastChangedDate: 01.04.2014
+ */
+
 @SuppressWarnings("serial")
 @Entity
 public class InspectionService extends Model {
@@ -58,6 +68,7 @@ public class InspectionService extends Model {
 			new InspectionService();
 
 		if (exists(id)) {
+			this.id = id;
 			copyValues(find.byId(id));
 			loadAdditional(this);
 		}
@@ -230,13 +241,17 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * Brise inspekcijsko tijelo iz baze i skriva sve izvjestaje vezane za to
+	 * Brise inspekcijsko tijelo iz baze i skriva brise izvjestaje vezane za to
 	 * inspekcijsko tijelo
 	 * 
 	 * @param id
 	 */
-	// TODO Uraditi skrivanje inspekcijskog tijela
 	public static void delete(Long id) {
+		List<Inspection> connected = Inspection.getFind().where()
+				.eq("inspection_service_id", id)
+				.findList();
+		for(int i = 0; i<connected.size(); i++)
+			connected.get(i).delete();
 		find.ref(id).delete();
 	}
 

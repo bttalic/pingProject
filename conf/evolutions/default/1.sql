@@ -1,24 +1,4 @@
 # --- !Ups
-
-create table inspection (
-  id                        BIGSERIAL not null,
-  inspection_date           date NOT NULL,
-  inspection_service_id     bigint NOT NULL,
-  product_id                bigint NOT NULL,
-  inspection_result         text NOT NULL,
-  safe                      boolean NULL,
-  constraint pk_inspection primary key (id))
-;
-
-create table inspection_service (
-  id                        BIGSERIAL not null,
-  name                      varchar(50),
-  inspectorate_id           bigint,
-  jurisdiction_id           bigint,
-  person_id                 bigint,
-  constraint pk_inspection_service primary key (id))
-;
-
 create table inspectorate (
   id                        BIGSERIAL not null,
   name                      varchar(16),
@@ -31,15 +11,6 @@ create table jurisdiction (
   constraint pk_jurisdiction primary key (id))
 ;
 
-create table person (
-  id                        BIGSERIAL not null,
-  name                      varchar(50),
-  phone_number              varchar(12),
-  email                     varchar(50),
-  fax                       varchar(12),
-  constraint pk_person primary key (id))
-;
-
 create table product (
   id                        BIGSERIAL not null,
   name                      varchar(50),
@@ -50,7 +21,33 @@ create table product (
   constraint pk_product primary key (id))
 ;
 
+create table person (
+  id                        BIGSERIAL not null,
+  name                      varchar(50),
+  phone_number              varchar(12),
+  email                     varchar(50),
+  fax                       varchar(12),
+  constraint pk_person primary key (id))
+;
 
+create table inspection_service (
+  id                        BIGSERIAL not null,
+  name                      varchar(50),
+  inspectorate_id           bigint references inspectorate(id),
+  jurisdiction_id           bigint references jurisdiction(id),
+  person_id                 bigint references person(id),
+  constraint pk_inspection_service primary key (id))
+;
+
+create table inspection (
+  id                        BIGSERIAL not null,
+  inspection_date           date NOT NULL,
+  inspection_service_id     bigint NOT NULL references inspection_service(id),
+  product_id                bigint NOT NULL references product(id),
+  inspection_result         text NOT NULL,
+  safe                      boolean NULL,
+  constraint pk_inspection primary key (id))
+;
 
 INSERT INTO jurisdiction VALUES ('1', 'Tržišna inspekcija');
 INSERT INTO jurisdiction VALUES ('2', 'Zdravstveno – sanitarna inspekcija');
