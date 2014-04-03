@@ -18,25 +18,7 @@
 
 
 	<div class="form-group">
-		@inputText(inspectionServiceForm("name"),
-		'_label->"Naziv inspekcijskog tijela",
-		'_showConstraints -> false
-		) 
-
-		@select(inspectionServiceForm("inspectorateId"), options(inspectorates),
-		'_label->"Inspektorat",
-		'_showConstraints -> false
-		)
-
-		@select(inspectionServiceForm("jurisdictionId"), options(jurisdictions),
-		'_label->"Nadležnost",
-		'_showConstraints -> false
-		)
-
-		@select(inspectionServiceForm("personId"), options(people),
-		'_label->"Kontakt Osoba",
-		'_showConstraints -> false
-		)
+		@_inspectionServiceForm(inspectionServiceForm, jurisdictions, inspectorates, people)
 
 		@inputText(inspectionServiceForm("id"),
 		'_label->"Id",
@@ -50,7 +32,7 @@
 		<input type="submit" value="Spremi promjene" class='btn btn-warning' > 
 	</div>
 } 
-@form(routes.InspectionServiceController.deleteInspectionService(service.getId())) {
+@form(routes.InspectionServiceController.deleteInspectionService( service.getId() ) ) {
 			<input type="submit" value="Izbrisi" class='btn btn-danger' > 
 		}
 </div>

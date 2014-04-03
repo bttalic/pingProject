@@ -6,18 +6,34 @@ import models.*;
 
 
 
+/**
+ * The Class InspectionServiceController.
+ */
 public class InspectionServiceController extends Controller {
 
 	
+	/** The inspection service form. */
 	static Form<InspectionService> inspectionServiceForm = Form.form(InspectionService.class);
+	
+	/** The filled form. */
 	static Form<InspectionService> filledForm = inspectionServiceForm.bindFromRequest();
 	
+	/**
+	 * Index.
+	 *
+	 * @return the result
+	 */
 	public static Result index() {
 		return ok(
 			views.html.InspectionService.inspectionServiceIndex.render(InspectionService.all())
 			);
 	}
 
+	/**
+	 * Creates the.
+	 *
+	 * @return the result
+	 */
 	public static Result create() {
 		return ok(
 			views.html.InspectionService.inspectionServiceCreate.render(
@@ -26,6 +42,12 @@ public class InspectionServiceController extends Controller {
 			);
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param id the id
+	 * @return the result
+	 */
 	public static Result update(Long id) {
 		if( InspectionService.exists(id) == true ){
 			InspectionService thisService = new InspectionService(id);
@@ -39,6 +61,11 @@ public class InspectionServiceController extends Controller {
 		}
 	}
 	
+	/**
+	 * New inspection service.
+	 *
+	 * @return the result
+	 */
 	public static Result newInspectionService() {
 		refreshFilledForm();
 		if(filledForm.hasErrors()) {
@@ -52,6 +79,11 @@ public class InspectionServiceController extends Controller {
 		}
 	}
 
+	/**
+	 * Update inspection service.
+	 *
+	 * @return the result
+	 */
 	public static Result updateInspectionService() {
 		refreshFilledForm();
 		if(filledForm.hasErrors()) {
@@ -63,12 +95,21 @@ public class InspectionServiceController extends Controller {
 		}
 	}
 
+	/**
+	 * Delete inspection service.
+	 *
+	 * @param id the id
+	 * @return the result
+	 */
 	public static Result deleteInspectionService(Long id){
 		InspectionService.delete(id);
 		cleanForms();
 		return redirect(routes.InspectionServiceController.index());
 	}
 	
+	/**
+	 * Refresh filled form.
+	 */
 	private static void refreshFilledForm(){
 		if( filledForm.equals(inspectionServiceForm.bindFromRequest()) == false 
 			&& inspectionServiceForm.bindFromRequest().data().isEmpty() == false ){
@@ -77,6 +118,9 @@ public class InspectionServiceController extends Controller {
 	}
 }
 
+/**
+ * Clean forms.
+ */
 private static void cleanForms(){
 	filledForm = Form.form(InspectionService.class);
 	filledForm.discardErrors();

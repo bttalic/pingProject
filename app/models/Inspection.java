@@ -19,29 +19,40 @@ import javax.persistence.*;
 @Entity
 public class Inspection extends Model {
 
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inspection_id_seq")
 	private Long id;
 
+	/** The inspection date. */
 	@Required
 	private Date inspectionDate;
 
+	/** The inspection service id. */
 	@Required
 	private Long inspectionServiceId;
 
+	/** The product id. */
 	@Required
 	private Long productId;
 
+	/** The inspection result. */
 	@Required
 	private String inspectionResult;
 
+	/** The safe. */
 	@Required
 	private boolean safe;
 
+	/** The product. */
 	public Product product;
+	
+	/** The inspection service. */
 	public InspectionService inspectionService;
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Long getId() {
@@ -49,14 +60,17 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Sets the id.
+	 *
+	 * @param id            the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
+	 * Gets the inspection date.
+	 *
 	 * @return the inspectionDate
 	 */
 	public Date getInspectionDate() {
@@ -64,14 +78,17 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * @param inspectionDate
-	 *            the inspectionDate to set
+	 * Sets the inspection date.
+	 *
+	 * @param inspectionDate            the inspectionDate to set
 	 */
 	public void setInspectionDate(Date inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 
 	/**
+	 * Gets the inspection service id.
+	 *
 	 * @return the inspectionServiceId
 	 */
 	public Long getInspectionServiceId() {
@@ -79,14 +96,17 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * @param inspectionServiceId
-	 *            the inspectionServiceId to set
+	 * Sets the inspection service id.
+	 *
+	 * @param inspectionServiceId            the inspectionServiceId to set
 	 */
 	public void setInspectionServiceId(Long inspectionServiceId) {
 		this.inspectionServiceId = inspectionServiceId;
 	}
 
 	/**
+	 * Gets the product id.
+	 *
 	 * @return the productId
 	 */
 	public Long getProductId() {
@@ -94,14 +114,17 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * @param productId
-	 *            the productId to set
+	 * Sets the product id.
+	 *
+	 * @param productId            the productId to set
 	 */
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
 	/**
+	 * Gets the inspection result.
+	 *
 	 * @return the inspectionResult
 	 */
 	public String getInspectionResult() {
@@ -109,14 +132,17 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * @param inspectionResult
-	 *            the inspectionResult to set
+	 * Sets the inspection result.
+	 *
+	 * @param inspectionResult            the inspectionResult to set
 	 */
 	public void setInspectionResult(String inspectionResult) {
 		this.inspectionResult = inspectionResult;
 	}
 
 	/**
+	 * Gets the find.
+	 *
 	 * @return the find
 	 */
 	public static Finder<Long, Inspection> getFind() {
@@ -124,21 +150,21 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * @param safe
-	 *            the safe to set
+	 * Sets the safe.
+	 *
+	 * @param safe            the safe to set
 	 */
 	public void setSafe(boolean safe) {
 		this.safe = safe;
 	}
 
-	/**
-	 * Varijabla sluzi kao konektor za bazu
-	 */
+	/** Varijabla sluzi kao konektor za bazu. */
 	private static Finder<Long, Inspection> find = new Finder<Long, Inspection>(
 			Long.class, Inspection.class);
 
 	/**
-	 * 
+	 * All.
+	 *
 	 * @return Listu kontrola iz baze poredanu po datumu inspekcije manji ka
 	 *         vecem
 	 */
@@ -152,9 +178,9 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id kontrole
+	 * Gets the inspection.
+	 *
+	 * @param id            id kontrole
 	 * @return instancu objekta
 	 */
 	public static Inspection getInspection(Long id) {
@@ -166,10 +192,9 @@ public class Inspection extends Model {
 	/**
 	 * Da bi sprijecili probleme sa brisanjem podataka ova klasa ne drzi
 	 * direktno instance druge klase nego id vrijednosti preko kojih se u ovoj
-	 * metodi te instance kreiraju
-	 * 
-	 * @param current
-	 *            instanca klase
+	 * metodi te instance kreiraju.
+	 *
+	 * @param current            instanca klase
 	 */
 	@SuppressWarnings("unused")
 	private static void loadAdditional(Inspection current) {
@@ -184,9 +209,9 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * Spasava inspekcijsku kontorlu u bazu
-	 * 
-	 * @param inspectionService
+	 * Spasava inspekcijsku kontorlu u bazu.
+	 *
+	 * @param inspection the inspection
 	 */
 	public static void create(Inspection inspection) {
 		inspection.save();
@@ -203,7 +228,8 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * 
+	 * Gets the inspection dates.
+	 *
 	 * @return HashMap datuma svih inspekcijskih kontrola
 	 */
 	public static Map<String, String> getInspectionDates() {
@@ -222,7 +248,8 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * 
+	 * Checks if is safe.
+	 *
 	 * @return Vraca vrijednost "Siguran" ako je proizvod siguran ili
 	 *         "Nesiguran" u suprontom slucaju
 	 */
@@ -232,23 +259,28 @@ public class Inspection extends Model {
 
 	/**
 	 * Na osnovu toga da li je tijelo sigurno vraca se ime klase za div u kojem
-	 * su podatci o kontroli
-	 * 
+	 * su podatci o kontroli.
+	 *
 	 * @return string koji predstavlja ime css klase
 	 */
 	public String getCSSClass() {
 		return this.safe == true ? "primary" : "danger";
 	}
 
+	/**
+	 * Find.
+	 *
+	 * @param id the id
+	 * @return the inspection
+	 */
 	public static Inspection find(Long id) {
 		return find.byId(id);
 	}
 
 	/**
-	 * Spasava promjene u bazu
-	 * 
-	 * @param newValues
-	 *            Objekt tipa Inspection u kojem su nove vrijednosti
+	 * Spasava promjene u bazu.
+	 *
+	 * @param newValues            Objekt tipa Inspection u kojem su nove vrijednosti
 	 */
 	public static void updateInspection(Inspection newValues) {
 		Inspection inspection = find.byId(newValues.id);
@@ -259,19 +291,18 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * Brise inspekcijsku kontrolu iz baze
-	 * 
-	 * @param id
-	 *            id kontrole
+	 * Brise inspekcijsku kontrolu iz baze.
+	 *
+	 * @param id            id kontrole
 	 */
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id koji treba provjeriti
+	 * Exists.
+	 *
+	 * @param id            id koji treba provjeriti
 	 * @return true ako kontrola postoji u bazi, u suprotnom false
 	 */
 	public static boolean exists(Long id) {
@@ -280,14 +311,11 @@ public class Inspection extends Model {
 
 	/**
 	 * Vraca filtriranu listu objekata tipa Inspection za izabrano inspekcijsko
-	 * za izabrani vremenski period sortiran po datumu kontrole
-	 * 
-	 * @param dateStart
-	 *            datum kontrole pocetak intervala
-	 * @param dateEnd
-	 *            datum kontrole kraj intervala
-	 * @param service_id
-	 *            id inspekcijskog tijela
+	 * za izabrani vremenski period sortiran po datumu kontrole.
+	 *
+	 * @param dateStart            datum kontrole pocetak intervala
+	 * @param dateEnd            datum kontrole kraj intervala
+	 * @param service_id            id inspekcijskog tijela
 	 * @return Lista kontrola filtrirana po datumu
 	 */
 	public static List<Inspection> filtered(Date dateStart, Date dateEnd,
@@ -321,10 +349,9 @@ public class Inspection extends Model {
 	}
 
 	/**
-	 * Kopira vrijednosti iz jednog u drugi objekt tipa Inspection
-	 * 
-	 * @param newValues
-	 *            objekt tipa Inspection koji sadrzi nove vrijednosti
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa Inspection.
+	 *
+	 * @param newValues            objekt tipa Inspection koji sadrzi nove vrijednosti
 	 */
 	private void copyValues(Inspection newValues) {
 		this.inspectionDate = newValues.inspectionDate;

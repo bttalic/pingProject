@@ -10,17 +10,13 @@ import java.util.Date;
  * $LastChangedRevision: 01.04.2014 $LastChangedDate: 01.04.2014
  */
 public class Search {
-	/**
-	 * Izabrani pocetni datum
-	 */
+	
+	/** Izabrani pocetni datum. */
 	public Date inspectionDateStart;
-	/**
-	 * Izabrani zavrsni datum
-	 */
+	
+	/** Izabrani zavrsni datum. */
 	public Date inspectionDateEnd;
 	
-	/**
-	 * Izabrano Inspekcijsko tijelo 
-	 */
+	/** Izabrano Inspekcijsko tijelo. */
 	public Long inspectionServiceId;
 }

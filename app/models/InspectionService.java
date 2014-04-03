@@ -6,6 +6,7 @@ import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * InspectionService
  * 
@@ -19,26 +20,36 @@ import javax.persistence.*;
 @Entity
 public class InspectionService extends Model {
 
+	/** The id. */
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inspection_service_id_seq")
 	@Id
 	private Long id;
 
+	/** The name. */
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
 	private String name;
 
+	/** The inspectorate id. */
 	@Required
 	private Long inspectorateId;
 
+	/** The jurisdiction id. */
 	@Required
 	private Long jurisdictionId;
 
+	/** The person id. */
 	@Required
 	private Long personId;
 
+	/** The contact person. */
 	public Person contactPerson;
+	
+	/** The jurisdiction. */
 	public Jurisdiction jurisdiction;
+	
+	/** The inspectorate. */
 	public Inspectorate inspectorate;
 
 	/**
@@ -58,10 +69,9 @@ public class InspectionService extends Model {
 	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
 	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
 	 * proslijedena nedozvoljena vrijednost za id kreira default instancu
-	 * InspectionService klase
-	 * 
-	 * @param id
-	 *            id inspekcijskog tijela
+	 * InspectionService klase.
+	 *
+	 * @param id            id inspekcijskog tijela
 	 */
 	public InspectionService(Long id) {
 		if (id == null)
@@ -75,6 +85,8 @@ public class InspectionService extends Model {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Long getId() {
@@ -82,14 +94,17 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Sets the id.
+	 *
+	 * @param id            the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -97,14 +112,17 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * Sets the name.
+	 *
+	 * @param name            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
+	 * Gets the inspectorate id.
+	 *
 	 * @return the inspectorateId
 	 */
 	public Long getInspectorateId() {
@@ -112,14 +130,17 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * @param inspectorateId
-	 *            the inspectorateId to set
+	 * Sets the inspectorate id.
+	 *
+	 * @param inspectorateId            the inspectorateId to set
 	 */
 	public void setInspectorateId(Long inspectorateId) {
 		this.inspectorateId = inspectorateId;
 	}
 
 	/**
+	 * Gets the jurisdiction id.
+	 *
 	 * @return the jurisdictionId
 	 */
 	public Long getJurisdictionId() {
@@ -127,14 +148,17 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * @param jurisdictionId
-	 *            the jurisdictionId to set
+	 * Sets the jurisdiction id.
+	 *
+	 * @param jurisdictionId            the jurisdictionId to set
 	 */
 	public void setJurisdictionId(Long jurisdictionId) {
 		this.jurisdictionId = jurisdictionId;
 	}
 
 	/**
+	 * Gets the person id.
+	 *
 	 * @return the personId
 	 */
 	public Long getPersonId() {
@@ -142,21 +166,21 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * @param personId
-	 *            the personId to set
+	 * Sets the person id.
+	 *
+	 * @param personId            the personId to set
 	 */
 	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 
-	/**
-	 * Varijabla sluzi kao konektor za bazu
-	 */
+	/** Varijabla sluzi kao konektor za bazu. */
 	public static Finder<Long, InspectionService> find = new Finder<Long, InspectionService>(
 			Long.class, InspectionService.class);
 
 	/**
-	 * 
+	 * All.
+	 *
 	 * @return Listu nadleznih tijela iz baze poredanu po imenu proizvoda A-Z
 	 */
 	public static List<InspectionService> all() {
@@ -171,10 +195,9 @@ public class InspectionService extends Model {
 	/**
 	 * Da bi sprijecili probleme sa brisanjem podataka ova klasa ne drzi
 	 * direktno instance druge klase nego id vrijednosti preko kojih se u ovoj
-	 * metodi te instance kreiraju
-	 * 
-	 * @param current
-	 *            instanca klase
+	 * metodi te instance kreiraju.
+	 *
+	 * @param current            instanca klase
 	 */
 	private static void loadAdditional(InspectionService current) {
 		current.contactPerson = new Person(current.personId);
@@ -183,10 +206,11 @@ public class InspectionService extends Model {
 	}
 
 	/**
+	 * All as map.
+	 *
 	 * @return Mapa svih inspekcijskih tijela u bazi, key je id proizvoda a
 	 *         vrijednost
-	 * 
-	 * @return HashMap<String, String>
+	 * HashMap<String, String>
 	 */
 	public static Map<String, String> allAsMap() {
 		List<InspectionService> list = all();
@@ -200,11 +224,10 @@ public class InspectionService extends Model {
 
 	/**
 	 * Mapa inspekcijskih tijela sa dodanom vrijednoscu <-1, Svi> u tome se
-	 * razlikuje od allAsMap() mapa se koristi za izbornik pretrage
-	 * 
-	 * @see allAsMap()
-	 * 
+	 * razlikuje od allAsMap() mapa se koristi za izbornik pretrage.
+	 *
 	 * @return HashMap key je id a vrijednost ime
+	 * @see allAsMap()
 	 */
 	public static Map<String, String> getInspectionServices() {
 		Map<String, String> services = new HashMap<String, String>();
@@ -218,19 +241,18 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * Spasava inspekcijsko tijelo u bazu
-	 * 
-	 * @param inspectionService
+	 * Spasava inspekcijsko tijelo u bazu.
+	 *
+	 * @param inspectionService the inspection service
 	 */
 	public static void create(InspectionService inspectionService) {
 		inspectionService.save();
 	}
 
 	/**
-	 * Spasava promjene u bazu
-	 * 
-	 * @param newValues
-	 *            Objekt tipa InspectionService u kojem su nove vrijednosti
+	 * Spasava promjene u bazu.
+	 *
+	 * @param newValues            Objekt tipa InspectionService u kojem su nove vrijednosti
 	 */
 	public static void updateInspectionService(InspectionService newValues) {
 		InspectionService inspectionService = find.byId(newValues.id);
@@ -242,9 +264,9 @@ public class InspectionService extends Model {
 
 	/**
 	 * Brise inspekcijsko tijelo iz baze i skriva brise izvjestaje vezane za to
-	 * inspekcijsko tijelo
-	 * 
-	 * @param id
+	 * inspekcijsko tijelo.
+	 *
+	 * @param id the id
 	 */
 	public static void delete(Long id) {
 		List<Inspection> connected = Inspection.getFind().where()
@@ -256,9 +278,9 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id koji treba provjeriti
+	 * Exists.
+	 *
+	 * @param id            id koji treba provjeriti
 	 * @return true ako inspekcijsko tijelo postoji u bazi, u suprotnom false
 	 */
 	public static boolean exists(Long id) {
@@ -266,10 +288,9 @@ public class InspectionService extends Model {
 	}
 
 	/**
-	 * Kopira vrijednosti iz jednog u drugi objekt tipa InspectionService
-	 * 
-	 * @param newValues
-	 *            objekt tipa InspectionService koji sadrzi nove vrijednosti
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa InspectionService.
+	 *
+	 * @param newValues            objekt tipa InspectionService koji sadrzi nove vrijednosti
 	 */
 	private void copyValues(InspectionService newValues) {
 		this.name = newValues.name;

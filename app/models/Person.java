@@ -7,6 +7,7 @@ import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * Person
  * 
@@ -21,24 +22,29 @@ import javax.persistence.*;
 @Entity
 public class Person extends Model {
 
+	/** The id. */
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id_seq")
 	@Id
 	private Long id;
 
+	/** The name. */
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
 	private String name;
 
+	/** The phone number. */
 	@Required
 	@Pattern(value = "\\+387[1-9]{8}$")
 	private String phoneNumber;
 
+	/** The email. */
 	@Required
 	@Email
 	@MaxLength(value = 50)
 	private String email;
 
+	/** The fax. */
 	@Pattern(value = "\\+387[1-9]{8}$")
 	private String fax;
 
@@ -55,17 +61,13 @@ public class Person extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id u bazi
-	 * @param name
-	 *            ime osobe
-	 * @param phoneNumber
-	 *            broj telefona
-	 * @param email
-	 *            email
-	 * @param fax
-	 *            fax (opcionalno)
+	 * Instantiates a new person.
+	 *
+	 * @param id            id u bazi
+	 * @param name            ime osobe
+	 * @param phoneNumber            broj telefona
+	 * @param email            email
+	 * @param fax            fax (opcionalno)
 	 */
 	public Person(Long id, String name, String phoneNumber, String email,
 			String fax) {
@@ -73,15 +75,12 @@ public class Person extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id u bazi
-	 * @param name
-	 *            ime osobe
-	 * @param phoneNumber
-	 *            broj telefona
-	 * @param email
-	 *            email
+	 * Instantiates a new person.
+	 *
+	 * @param id            id u bazi
+	 * @param name            ime osobe
+	 * @param phoneNumber            broj telefona
+	 * @param email            email
 	 */
 	public Person(Long id, String name, String phoneNumber, String email) {
 		this.id=id;
@@ -94,10 +93,9 @@ public class Person extends Model {
 	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
 	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
 	 * proslijedena nedozvoljena vrijednost za id kreira default instancu Person
-	 * klase
-	 * 
-	 * @param id
-	 *            id proizvoda
+	 * klase.
+	 *
+	 * @param id            id proizvoda
 	 */
 	public Person(Long id) {
 		if (id == null) {
@@ -113,6 +111,8 @@ public class Person extends Model {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Long getId() {
@@ -120,14 +120,17 @@ public class Person extends Model {
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Sets the id.
+	 *
+	 * @param id            the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -135,8 +138,9 @@ public class Person extends Model {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * Sets the name.
+	 *
+	 * @param name            the name to set
 	 */
 	public void setName(String name) {
 		if (name.length() > 3 && name.length() < 50)
@@ -144,6 +148,8 @@ public class Person extends Model {
 	}
 
 	/**
+	 * Gets the phone number.
+	 *
 	 * @return the phoneNumber
 	 */
 	public String getPhoneNumber() {
@@ -151,8 +157,9 @@ public class Person extends Model {
 	}
 
 	/**
-	 * @param phoneNumber
-	 *            the phoneNumber to set
+	 * Sets the phone number.
+	 *
+	 * @param phoneNumber            the phoneNumber to set
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		if (phoneNumber.length() == 12 && phoneNumber.indexOf("+387") == 0)
@@ -160,6 +167,8 @@ public class Person extends Model {
 	}
 
 	/**
+	 * Gets the email.
+	 *
 	 * @return the email
 	 */
 	public String getEmail() {
@@ -167,14 +176,17 @@ public class Person extends Model {
 	}
 
 	/**
-	 * @param email
-	 *            the email to set
+	 * Sets the email.
+	 *
+	 * @param email            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	/**
+	 * Gets the fax.
+	 *
 	 * @return the fax
 	 */
 	public String getFax() {
@@ -182,22 +194,22 @@ public class Person extends Model {
 	}
 
 	/**
-	 * @param fax
-	 *            the fax to set
+	 * Sets the fax.
+	 *
+	 * @param fax            the fax to set
 	 */
 	public void setFax(String fax) {
 		if (fax.length() == 12 && fax.indexOf("+387") == 0)
 			this.fax = fax;
 	}
 
-	/**
-	 * Varijabla sluzi kao konektor za bazu
-	 */
+	/** Varijabla sluzi kao konektor za bazu. */
 	private static Finder<Long, Person> find = new Finder<Long, Person>(
 			Long.class, Person.class);
 
 	/**
-	 * 
+	 * All.
+	 *
 	 * @return Listu osoba iz baze poredanu po imenu osobe A-Z
 	 */
 	public static List<Person> all() {
@@ -205,11 +217,12 @@ public class Person extends Model {
 	}
 
 	/**
+	 * All as map.
+	 *
 	 * @return Mapa svih osoba u bazi, key je id osobe a vrijednost ime + broj
 	 *         telefona
+	 * HashMap<String, String>
 	 * @see toString()
-	 * 
-	 * @return HashMap<String, String>
 	 */
 	public static Map<String, String> allAsMap() {
 		List<Person> list = all();
@@ -221,15 +234,19 @@ public class Person extends Model {
 		return hash;
 	}
 
+	/**
+	 * Creates the.
+	 *
+	 * @param person the person
+	 */
 	public static void create(Person person) {
 		person.save();
 	}
 
 	/**
-	 * Spasava promjene u bazu
-	 * 
-	 * @param newValues
-	 *            Objekt tipa Person u kojem su nove vrijednosti
+	 * Spasava promjene u bazu.
+	 *
+	 * @param newValues            Objekt tipa Person u kojem su nove vrijednosti
 	 */
 	public static void updatePerson(Person newValues) {
 		Person person = find.byId(newValues.id);
@@ -242,18 +259,18 @@ public class Person extends Model {
 	/**
 	 * Brise osobu iz baze, izbjegnuto je brisanje inspekcijskih tijela
 	 * povezanih s tim osobama da bi se omogucilo dodavanje druge osobe
-	 * umjesto gubljenja inspkecijskih tijela i povezanih kontrola
-	 * 
-	 * @param id
+	 * umjesto gubljenja inspkecijskih tijela i povezanih kontrola.
+	 *
+	 * @param id the id
 	 */
 	public static void delete(Long id) {
 		find.ref(id).delete();
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id koji treba provjeriti
+	 * Exists.
+	 *
+	 * @param id            id koji treba provjeriti
 	 * @return true ako proizvod postoji u bazi, u suprotnom false
 	 */
 	public static boolean exists(Long id) {
@@ -261,10 +278,9 @@ public class Person extends Model {
 	}
 
 	/**
-	 * Kopira vrijednosti iz jednog u drugi objekt tipa Person
-	 * 
-	 * @param newValues
-	 *            objekt tipa Person koji sadrzi nove vrijednosti
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa Person.
+	 *
+	 * @param newValues            objekt tipa Person koji sadrzi nove vrijednosti
 	 */
 	private void copyValues(Person newValues) {
 		this.name = newValues.name;

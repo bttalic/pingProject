@@ -6,24 +6,45 @@ import models.*;
 
 
 
+/**
+ * The Class PersonController.
+ */
 public class PersonController extends Controller {
 
 	
+	/** The person form. */
 	static Form<Person> personForm = Form.form(Person.class);
+	
+	/** The filled form. */
 	static Form<Person> filledForm = personForm.bindFromRequest();
 	
+    /**
+     * Index.
+     *
+     * @return the result
+     */
     public static Result index() {
         return ok(
         	views.html.Person.personIndex.render(Person.all(),filledForm)
         	);
     }
 
+    /**
+     * Creates the.
+     *
+     * @return the result
+     */
     public static Result create() {
     	return ok(
     			views.html.Person.personCreate.render(personForm)
     			);
     }
     
+    /**
+     * New person.
+     *
+     * @return the result
+     */
     public static Result newPerson() {
         refreshFilledForm();
     	if(filledForm.hasErrors()) {
@@ -35,6 +56,11 @@ public class PersonController extends Controller {
 		  }
     }
 
+    /**
+     * Update person.
+     *
+     * @return the result
+     */
     public static Result updatePerson() {
         refreshFilledForm();
         if(filledForm.hasErrors()) {
@@ -46,12 +72,21 @@ public class PersonController extends Controller {
           }
     }
 
+    /**
+     * Delete person.
+     *
+     * @param id the id
+     * @return the result
+     */
     public static Result deletePerson(Long id){
         Person.delete(id);
         cleanForms();
         return ok();
     }
     
+    /**
+     * Refresh filled form.
+     */
     private static void refreshFilledForm(){
     	if( filledForm.equals(personForm.bindFromRequest()) == false 
     			&& personForm.bindFromRequest().data().isEmpty() == false ){
@@ -60,6 +95,9 @@ public class PersonController extends Controller {
     	}
     }
     
+    /**
+     * Clean forms.
+     */
     private static void cleanForms(){
     	filledForm = Form.form(Person.class);
     	filledForm.discardErrors();

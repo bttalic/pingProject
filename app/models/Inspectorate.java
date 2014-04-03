@@ -21,17 +21,19 @@ import javax.persistence.*;
 @Entity
 public class Inspectorate extends Model {
 
+	/** The id. */
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inspectorate_id_seq")
 	@Id
 	private Long id;
 
+	/** The name. */
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
 	private String name;
 
 	/**
-	 * Konstruktor za slucaj greske pri spremanju/ucitavanju podataka
+	 * Konstruktor za slucaj greske pri spremanju/ucitavanju podataka.
 	 */
 	public Inspectorate() {
 		String placeHolder = "NA";
@@ -42,10 +44,9 @@ public class Inspectorate extends Model {
 	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
 	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
 	 * proslijedena nedozvoljena vrijednost za id kreira default instancu
-	 * Inspectorate klase
-	 * 
-	 * @param id
-	 *            id proizvoda
+	 * Inspectorate klase.
+	 *
+	 * @param id            id proizvoda
 	 */
 	public Inspectorate(Long id) {
 		if (id == null)
@@ -58,6 +59,8 @@ public class Inspectorate extends Model {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Long getId() {
@@ -65,20 +68,21 @@ public class Inspectorate extends Model {
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Varijabla sluzi kao konektor za bazu
-	 */
+	/** Varijabla sluzi kao konektor za bazu. */
 	public static Finder<Long, Inspectorate> find = new Finder<Long, Inspectorate>(
 			Long.class, Inspectorate.class);
 
 	/**
-	 * 
+	 * All.
+	 *
 	 * @return Listu iz baze poredanu po nazivu A-Z
 	 */
 	public static List<Inspectorate> all() {
@@ -86,9 +90,9 @@ public class Inspectorate extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id koji treba provjeriti
+	 * Exists.
+	 *
+	 * @param id            id koji treba provjeriti
 	 * @return true ako nadleznost postoji u bazi, u suprotnom false
 	 */
 	public static boolean exists(Long id) {
@@ -96,9 +100,10 @@ public class Inspectorate extends Model {
 	}
 
 	/**
+	 * All as map.
+	 *
 	 * @return Mapa svih osoba u bazi, key je id nadleznosti a vrijednost ime
-	 * 
-	 * @return HashMap<String, String>
+	 * HashMap<String, String>
 	 */
 	public static Map<String, String> allAsMap() {
 		List<Inspectorate> list = all();
@@ -110,10 +115,9 @@ public class Inspectorate extends Model {
 	}
 
 	/**
-	 * Kopira vrijednosti iz jednog u drugi objekt tipa Inspectorate
-	 * 
-	 * @param old
-	 *            objekt tipa Inspectorate koji sadrzi nove vrijednosti
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa Inspectorate.
+	 *
+	 * @param old            objekt tipa Inspectorate koji sadrzi nove vrijednosti
 	 */
 	private void copyValues(Inspectorate old) {
 		this.name = old.name;

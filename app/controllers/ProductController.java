@@ -5,11 +5,23 @@ import play.mvc.*;
 import play.data.*;
 import models.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProductController.
+ */
 public class ProductController extends Controller {
 	
+	/** The product form. */
 	static Form<Product> productForm = Form.form(Product.class);
+	
+	/** The filled form. */
 	static Form<Product> filledForm = productForm.bindFromRequest();
     
+    /**
+     * Index.
+     *
+     * @return the result
+     */
     public static Result index() {
     	refreshFilledForm();
     	if(filledForm != null)
@@ -24,12 +36,22 @@ public class ProductController extends Controller {
     	}
     }
     
+    /**
+     * Creates the.
+     *
+     * @return the result
+     */
     public static Result create() {
     	return ok(
     			views.html.Product.productCreate.render(productForm)
     			);
     }
     
+    /**
+     * New product.
+     *
+     * @return the result
+     */
     public static Result newProduct() {
     	refreshFilledForm();
     	if(filledForm.hasErrors()) {
@@ -41,6 +63,11 @@ public class ProductController extends Controller {
 		  }
     }
     
+    /**
+     * Update product.
+     *
+     * @return the result
+     */
     public static Result updateProduct() {
     	refreshFilledForm();
     	if(filledForm.hasErrors() ) {
@@ -52,12 +79,21 @@ public class ProductController extends Controller {
 		  }
     }
     
+    /**
+     * Delete product.
+     *
+     * @param id the id
+     * @return the result
+     */
     public static Result deleteProduct(Long id){
     	Product.delete(id);
     	cleanForms();
     	return ok();
     }
     
+    /**
+     * Refresh filled form.
+     */
     private static void refreshFilledForm(){
     	if( filledForm.equals(productForm.bindFromRequest()) == false 
     			&& productForm.bindFromRequest().data().isEmpty() == false ){
@@ -66,6 +102,9 @@ public class ProductController extends Controller {
     	}
     }
     
+    /**
+     * Clean forms.
+     */
     private static void cleanForms(){
     	filledForm = Form.form(Product.class);
     	filledForm.discardErrors();

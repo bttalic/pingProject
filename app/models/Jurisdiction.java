@@ -19,17 +19,19 @@ import javax.persistence.*;
 @Entity
 public class Jurisdiction extends Model {
 
+	/** The id. */
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jurisdiction_id_seq")
 	@Id
 	private Long id;
 
+	/** The name. */
 	@Required
 	@MinLength(value = 2)
 	@MaxLength(value = 16)
 	private String name;
 
 	/**
-	 * Konstruktor za slucaj greske pri spremanju/ucitavanju podataka
+	 * Konstruktor za slucaj greske pri spremanju/ucitavanju podataka.
 	 */
 	public Jurisdiction() {
 		String placeHolder = "NA";
@@ -40,10 +42,9 @@ public class Jurisdiction extends Model {
 	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
 	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
 	 * proslijedena nedozvoljena vrijednost za id kreira default instancu
-	 * Jurisdiction klase
-	 * 
-	 * @param id
-	 *            id proizvoda
+	 * Jurisdiction klase.
+	 *
+	 * @param id            id proizvoda
 	 */
 	public Jurisdiction(Long id) {
 		if (id == null)
@@ -56,6 +57,8 @@ public class Jurisdiction extends Model {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Long getId() {
@@ -63,20 +66,21 @@ public class Jurisdiction extends Model {
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Varijabla sluzi kao konektor za bazu
-	 */
+	/** Varijabla sluzi kao konektor za bazu. */
 	public static Finder<Long, Jurisdiction> find = new Finder<Long, Jurisdiction>(
 			Long.class, Jurisdiction.class);
 
 	/**
-	 * 
+	 * All.
+	 *
 	 * @return Listu nadleznosti iz baze poredanu po nazivu A-Z
 	 */
 	public static List<Jurisdiction> all() {
@@ -84,9 +88,9 @@ public class Jurisdiction extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id koji treba provjeriti
+	 * Exists.
+	 *
+	 * @param id            id koji treba provjeriti
 	 * @return true ako nadleznost postoji u bazi, u suprotnom false
 	 */
 	public static boolean exists(Long id) {
@@ -94,9 +98,10 @@ public class Jurisdiction extends Model {
 	}
 
 	/**
-	 * @return Mapa svih osoba u bazi, key je id nadleznosti a vrijednost ime
+	 * All as map.
 	 *
-	 * @return HashMap<String, String>
+	 * @return Mapa svih osoba u bazi, key je id nadleznosti a vrijednost ime
+	 * HashMap<String, String>
 	 */
 	public static Map<String, String> allAsMap() {
 		List<Jurisdiction> list = all();
@@ -108,10 +113,9 @@ public class Jurisdiction extends Model {
 	}
 
 	/**
-	 * Kopira vrijednosti iz jednog u drugi objekt tipa Jurisdiction
-	 * 
-	 * @param old
-	 *            objekt tipa Jurisdiction koji sadrzi nove vrijednosti
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa Jurisdiction.
+	 *
+	 * @param old            objekt tipa Jurisdiction koji sadrzi nove vrijednosti
 	 */
 	private void copyValues(Jurisdiction old) {
 		this.name = old.name;

@@ -11,6 +11,9 @@ import play.mvc.*;
 
 import views.html.*;
 
+/**
+ * The Class Application.
+ */
 public class Application extends Controller {
 
 

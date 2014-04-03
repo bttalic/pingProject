@@ -18,30 +18,36 @@ import javax.persistence.*;
 @Entity
 public class Product extends Model {
 
+	/** The id. */
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
 	@Id
 	private Long id;
 
+	/** The name. */
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
 	private String name;
 
+	/** The manufacturer. */
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
 	private String manufacturer;
 
+	/** The country of origin. */
 	@Required
 	@MinLength(value = 3)
 	@MaxLength(value = 50)
 	private String countryOfOrigin;
 
 	// Optional values
+	/** The serial number. */
 	@MinLength(value = 3)
 	@MaxLength(value = 20)
 	private String serialNumber;
 
+	/** The description. */
 	@MinLength(value = 3)
 	@MaxLength(value = 255)
 	private String description;
@@ -62,18 +68,14 @@ public class Product extends Model {
 	}
 
 	/**
-	 * @param id
-	 *            id proizvoda u bazi
-	 * @param name
-	 *            ime proizvoda
-	 * @param manufacturer
-	 *            proizvodac
-	 * @param countryOfOrigin
-	 *            zemlja porijekla
-	 * @param serialNumber
-	 *            serijski broj proizvoda
-	 * @param description
-	 *            opis proizvoda
+	 * Instantiates a new product.
+	 *
+	 * @param id            id proizvoda u bazi
+	 * @param name            ime proizvoda
+	 * @param manufacturer            proizvodac
+	 * @param countryOfOrigin            zemlja porijekla
+	 * @param serialNumber            serijski broj proizvoda
+	 * @param description            opis proizvoda
 	 */
 	public Product(Long id, String name, String manufacturer,
 			String countryOfOrigin, String serialNumber, String description) {
@@ -87,18 +89,13 @@ public class Product extends Model {
 
 	/**
 	 * Kreira Product (Proizvod) bez postavljenog id-a, id ce dobiti vrijednost
-	 * slijedeceg id-a iz baze
-	 * 
-	 * @param name
-	 *            ime proizvoda
-	 * @param manufacturer
-	 *            proizvodac
-	 * @param countryOfOrigin
-	 *            zemlja porijekla
-	 * @param serialNumber
-	 *            serijski broj proizvoda
-	 * @param description
-	 *            opis proizvoda
+	 * slijedeceg id-a iz baze.
+	 *
+	 * @param name            ime proizvoda
+	 * @param manufacturer            proizvodac
+	 * @param countryOfOrigin            zemlja porijekla
+	 * @param serialNumber            serijski broj proizvoda
+	 * @param description            opis proizvoda
 	 */
 	public Product(String name, String manufacturer, String countryOfOrigin,
 			String serialNumber, String description) {
@@ -114,10 +111,9 @@ public class Product extends Model {
 	 * Sluzi da bi se izbjegao scenarij rusenja aplikacije u slucaju pretrage za
 	 * ne postojecom id vrijednosti ili null vrijednosti U slucaju da je
 	 * proslijedena nedozvoljena vrijednost za id kreira default instancu
-	 * Product klase
-	 * 
-	 * @param id
-	 *            id proizvoda
+	 * Product klase.
+	 *
+	 * @param id            id proizvoda
 	 */
 	public Product(Long id) {
 		if (id == null) {
@@ -133,27 +129,37 @@ public class Product extends Model {
 
 	/* Geteri i Seteri */
 	/**
-	 * Geter funkcija za id
-	 * 
+	 * Geter funkcija za id.
+	 *
 	 * @return vraca id proizvoda
 	 */
 	public Long getId() {
 		return this.id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Seter za name (ime) proizvoda Vrijednost mora imati duzinu izmedu 3 i 50
-	 * znakova
-	 * 
-	 * @param name
+	 * znakova.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		if (name.length() > 3 && name.length() < 50)
@@ -161,8 +167,8 @@ public class Product extends Model {
 	}
 
 	/**
-	 * Geter za varijablu manufacturer (proizvodac)
-	 * 
+	 * Geter za varijablu manufacturer (proizvodac).
+	 *
 	 * @return proizvodaca
 	 */
 	public String getManufacturer() {
@@ -171,9 +177,9 @@ public class Product extends Model {
 
 	/**
 	 * Seter za varijablu manufacturer (proizvodac) Vrijednost mora imati duzinu
-	 * izmedu 3 i 50 znakova
-	 * 
-	 * @param manufacturer
+	 * izmedu 3 i 50 znakova.
+	 *
+	 * @param manufacturer the new manufacturer
 	 */
 	public void setManufacturer(String manufacturer) {
 		if (manufacturer.length() > 3 && manufacturer.length() < 50)
@@ -182,8 +188,8 @@ public class Product extends Model {
 
 	/**
 	 * Geter za zemlju porijekla Vrijednost mora imati duzinu izmedu 3 i 50
-	 * znakova
-	 * 
+	 * znakova.
+	 *
 	 * @return zemlju porijekla
 	 */
 	public String getCountryOfOrigin() {
@@ -192,9 +198,9 @@ public class Product extends Model {
 
 	/**
 	 * Seter za zemlju porijekla Vrijednost mora imati duzinu izmedu 3 i 50
-	 * znakova
-	 * 
-	 * @param countryOfOrigin
+	 * znakova.
+	 *
+	 * @param countryOfOrigin the new country of origin
 	 */
 	public void setCountryOfOrigin(String countryOfOrigin) {
 		if (countryOfOrigin.length() > 3 && countryOfOrigin.length() < 50)
@@ -203,8 +209,8 @@ public class Product extends Model {
 
 	/**
 	 * Geter za serijski broj proizvoda Vrijednost mora imati duzinu izmedu 3 i
-	 * 50 znakova
-	 * 
+	 * 50 znakova.
+	 *
 	 * @return serialNumber
 	 */
 	public String getSerialNumber() {
@@ -213,9 +219,9 @@ public class Product extends Model {
 
 	/**
 	 * Seter za serijski broj proizvoda Vrijednost mora imati duzinu izmedu 3 i
-	 * 50 znakova
-	 * 
-	 * @param serialNumber
+	 * 50 znakova.
+	 *
+	 * @param serialNumber the new serial number
 	 */
 	public void setSerialNumber(String serialNumber) {
 		if (serialNumber.length() >= 3 && serialNumber.length() <= 50)
@@ -223,7 +229,8 @@ public class Product extends Model {
 	}
 
 	/**
-	 * 
+	 * Gets the description.
+	 *
 	 * @return opis proizvoda
 	 */
 	public String getDescription() {
@@ -231,23 +238,22 @@ public class Product extends Model {
 	}
 
 	/**
-	 * Vrijednost mora imati duzinu izmedu 3 i 255 znakova
-	 * 
-	 * @param description
+	 * Vrijednost mora imati duzinu izmedu 3 i 255 znakova.
+	 *
+	 * @param description the new description
 	 */
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/**
-	 * Varijabla sluzi kao konektor za bazu
-	 */
+	/** Varijabla sluzi kao konektor za bazu. */
 	private static Finder<Long, Product> find = new Finder<Long, Product>(
 			Long.class, Product.class);
 
 	/**
-	 * 
+	 * All.
+	 *
 	 * @return Listu proizvoda iz baze poredanu po imenu proizvoda A-Z
 	 */
 	public static List<Product> all() {
@@ -255,11 +261,12 @@ public class Product extends Model {
 	}
 
 	/**
+	 * All as map.
+	 *
 	 * @return Mapa svih proizvoda u bazi, key je id proizvoda a vrijednost ime
 	 *         + proizvodac proizvoda
+	 * HashMap<String, String>
 	 * @see toString()
-	 * 
-	 * @return HashMap<String, String>
 	 */
 	public static Map<String, String> allAsMap() {
 		List<Product> list = all();
@@ -272,19 +279,18 @@ public class Product extends Model {
 	}
 
 	/**
-	 * Spasava proiyvod u bazu
-	 * 
-	 * @param product
+	 * Spasava proiyvod u bazu.
+	 *
+	 * @param product the product
 	 */
 	public static void create(Product product) {
 		product.save();
 	}
 
 	/**
-	 * Spasava promjene u bazu
-	 * 
-	 * @param newValues
-	 *            Objekt tipa Product u kojem su nove vrijednosti
+	 * Spasava promjene u bazu.
+	 *
+	 * @param newValues            Objekt tipa Product u kojem su nove vrijednosti
 	 */
 	public static void updateProduct(Product newValues) {
 		Product product = find.byId(newValues.id);
@@ -295,9 +301,9 @@ public class Product extends Model {
 	}
 
 	/**
-	 * Brise proizvod iz baze i skriva sve izvjestaje vezane za taj proizvod
-	 * 
-	 * @param id
+	 * Brise proizvod iz baze i skriva sve izvjestaje vezane za taj proizvod.
+	 *
+	 * @param id the id
 	 */
 	public static void delete(Long id) {
 		List<Inspection> inspections = Inspection.getFind()
@@ -310,9 +316,9 @@ public class Product extends Model {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 *            id koji treba provjeriti
+	 * Exists.
+	 *
+	 * @param id            id koji treba provjeriti
 	 * @return true ako proizvod postoji u bazi, u suprotnom false
 	 */
 	public static boolean exists(Long id) {
@@ -320,10 +326,9 @@ public class Product extends Model {
 	}
 
 	/**
-	 * Kopira vrijednosti iz jednog u drugi objekt tipa Product
-	 * 
-	 * @param newValues
-	 *            objekt tipa Product koji sadrzi nove vrijednosti
+	 * Kopira vrijednosti iz jednog u drugi objekt tipa Product.
+	 *
+	 * @param newValues            objekt tipa Product koji sadrzi nove vrijednosti
 	 */
 	private void copyValues(Product newValues) {
 		this.name = newValues.name;
