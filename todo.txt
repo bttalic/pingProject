@@ -1,2 +1,0 @@
-Form input na index moze ubaciti pogresne vrijednosti e.g. zemlja porijekla u opis
-
